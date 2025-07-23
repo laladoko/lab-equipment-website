@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Star, CheckCircle, ArrowLeft } from 'lucide-react';
+import { ExternalLink, CheckCircle, ArrowLeft } from 'lucide-react';
 import ProductImage from './ProductImage';
 import { type OlympusProduct } from '../../data/olympus-products';
 
@@ -144,15 +144,6 @@ export default function ProductDetail({ product, onClose }: ProductDetailProps) 
           {/* 底部操作按钮 */}
           <div className="mt-8 pt-6 border-t border-gray-200">
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                href={product.officialLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all duration-300"
-              >
-                <Star className="w-5 h-5 mr-2" />
-                查看官方详情
-              </a>
               <a
                 href={product.link}
                 target="_blank"

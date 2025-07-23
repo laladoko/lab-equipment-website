@@ -5,7 +5,7 @@ import { ChevronDown, Award, Users, Globe, Zap } from 'lucide-react';
 
 export default function Hero() {
   const stats = [
-    { icon: Award, value: '10+', label: '年专业经验' },
+    { icon: Award, value: '20+', label: '年专业经验' },
     { icon: Users, value: '500+', label: '合作客户' },
     { icon: Globe, value: '4', label: '国际品牌代理' },
     { icon: Zap, value: '24h', label: '快速响应' },

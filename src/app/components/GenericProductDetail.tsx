@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Star, CheckCircle, ArrowLeft } from 'lucide-react';
+import { ExternalLink, CheckCircle, ArrowLeft } from 'lucide-react';
 import ProductImage from './ProductImage';
 
 interface GenericProduct {
@@ -163,47 +163,25 @@ export default function GenericProductDetail({ product, onClose, brandName }: Ge
                 
                 if (shouldShowContact) {
                   return (
-                    <>
-                      <a
-                        href="/contact"
-                        className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-                      >
-                        <ExternalLink className="w-5 h-5 mr-2" />
-                        联系我们
-                      </a>
-                      <a
-                        href={product.officialLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all duration-300"
-                      >
-                        <Star className="w-5 h-5 mr-2" />
-                        查看官方详情
-                      </a>
-                    </>
+                    <a
+                      href="/contact"
+                      className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-xl hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      <ExternalLink className="w-5 h-5 mr-2" />
+                      联系我们
+                    </a>
                   );
                 } else {
                   return (
-                    <>
-                      <a
-                        href={product.officialLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gray-100 text-gray-700 font-semibold rounded-xl hover:bg-gray-200 transition-all duration-300"
-                      >
-                        <Star className="w-5 h-5 mr-2" />
-                        查看官方详情
-                      </a>
-                      <a
-                        href={product.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-                      >
-                        <ExternalLink className="w-5 h-5 mr-2" />
-                        立即咨询
-                      </a>
-                    </>
+                    <a
+                      href={product.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    >
+                      <ExternalLink className="w-5 h-5 mr-2" />
+                      立即咨询
+                    </a>
                   );
                 }
               })()}

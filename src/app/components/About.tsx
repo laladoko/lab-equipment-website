@@ -61,7 +61,7 @@ export default function About() {
 
             <div className="grid grid-cols-2 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600 mb-2">10+</div>
+                <div className="text-3xl font-bold text-blue-600 mb-2">20+</div>
                 <div className="text-gray-600">年行业经验</div>
               </div>
               <div className="text-center">

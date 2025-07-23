@@ -17,9 +17,9 @@ export interface BrandData {
 export const brandData: Record<string, BrandData> = {
   'olympus': {
     name: 'EVIDENT / OLYMPUS',
-    description: '全球领先的光学仪器制造商，专业提供显微镜、内窥镜等精密光学设备',
-    longDescription: 'EVIDENT/OLYMPUS是全球知名的光学仪器制造商，在显微镜、内窥镜、工业检测设备等领域享有盛誉。我们作为官方授权代理商，为客户提供最优质的产品和服务。',
-    features: ['数码显微镜', '激光扫描显微镜', '测量显微镜', '工业检测设备', '表面分析仪器', '半导体检测设备'],
+    description: '全球领先的光学仪器制造商，专业提供显微镜等精密光学设备',
+    longDescription: 'EVIDENT/OLYMPUS是全球知名的光学仪器制造商，在显微镜等领域享有盛誉。我们作为官方授权代理商，为客户提供最优质的产品和服务。',
+    features: ['数码显微镜', '激光扫描显微镜', '测量显微镜', '表面分析仪器', '半导体检测设备'],
     products: [
       'DSX2000 数码显微镜',
       'OLS5100 3D激光扫描显微镜',

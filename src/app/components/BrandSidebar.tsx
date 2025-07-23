@@ -48,15 +48,15 @@ export default function BrandSidebar({ features, color, accentColor, brandName }
           <div className="space-y-4 mb-6">
             <div className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
               <Phone className="w-5 h-5 mr-3 text-blue-600" />
-              <span>400-123-4567</span>
+              <span>0571-89988123 / 13305715395</span>
             </div>
             <div className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
               <Mail className="w-5 h-5 mr-3 text-blue-600" />
-              <span>info@labequipment.com</span>
+              <span>13305715395@163.com</span>
             </div>
             <div className="flex items-center text-gray-600 hover:text-blue-600 transition-colors">
               <MapPin className="w-5 h-5 mr-3 text-blue-600" />
-              <span>浙江省杭州西湖区博科大厦</span>
+              <span>杭州市三墩西湖科技园西园路9号博科大厦8楼</span>
             </div>
           </div>
 
