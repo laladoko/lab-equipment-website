@@ -91,7 +91,7 @@ log_info "开始远程部署..."
 remote_deploy
 
 log_info "部署完成！"
-log_info "网站地址: http://${SERVER_IP}"
+log_info "网站地址: https://www.qple.net"
 log_info "您可以在浏览器中访问查看最新版本"
 
 echo ""
