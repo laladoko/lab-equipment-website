@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Olympus产品图片测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .product-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .product-category {
+            color: #666;
+            font-size: 14px;
+        }
+        .status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>Olympus产品图片测试</h1>
+    <p>测试所有Olympus产品的图片是否能正常显示</p>
+    
+    <div class="container" id="productContainer">
+        <!-- 产品卡片将通过JavaScript动态生成 -->
+    </div>
+
+    <script>
+        const products = [
+            {
+                name: 'DSX2000 数码显微镜',
+                category: '数码显微镜',
+                image: '/brands/olympus/55212497.png'
+            },
+            {
+                name: 'OLS5100 3D激光扫描显微镜',
+                category: '激光扫描显微镜',
+                image: '/brands/olympus/47640819.png'
+            },
+            {
+                name: 'STM7 测量显微镜',
+                category: '测量显微镜',
+                image: '/brands/olympus/47348538.png'
+            },
+            {
+                name: 'SZX7 体视显微镜',
+                category: '体视显微镜',
+                image: '/brands/olympus/47577173.png'
+            },
+            {
+                name: 'DSX1000 数码显微镜',
+                category: '数码显微镜',
+                image: '/brands/olympus/47576962.jpg'
+            },
+            {
+                name: 'GX53 倒置显微镜',
+                category: '倒置显微镜',
+                image: '/brands/olympus/47582528.jpg'
+            },
+            {
+                name: 'BX53M 正置金相显微镜',
+                category: '金相显微镜',
+                image: '/brands/olympus/47573095.jpg'
+            },
+            {
+                name: 'SZX16 体视显微镜',
+                category: '体视显微镜',
+                image: '/brands/olympus/47577947.jpg'
+            },
+            {
+                name: 'BXFM 设备组装型系统工业显微镜',
+                category: '工业显微镜',
+                image: '/brands/olympus/47573016.jpg'
+            },
+            {
+                name: 'MX63/MX63L 半导体工业检测显微镜',
+                category: '半导体检测显微镜',
+                image: '/brands/olympus/47326659.jpg'
+            },
+            {
+                name: 'SZX10 体视显微镜',
+                category: '体视显微镜',
+                image: '/brands/olympus/55212497.png'
+            }
+        ];
+
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            const img = document.createElement('img');
+            img.className = 'product-image';
+            img.src = product.image;
+            img.alt = product.name;
+            
+            const name = document.createElement('div');
+            name.className = 'product-name';
+            name.textContent = product.name;
+            
+            const category = document.createElement('div');
+            category.className = 'product-category';
+            category.textContent = product.category;
+            
+            const status = document.createElement('div');
+            status.className = 'status';
+            status.textContent = '测试中...';
+            
+            img.onload = function() {
+                status.textContent = '✅ 加载成功';
+                status.className = 'status success';
+            };
+            
+            img.onerror = function() {
+                status.textContent = '❌ 加载失败';
+                status.className = 'status error';
+            };
+            
+            card.appendChild(img);
+            card.appendChild(name);
+            card.appendChild(category);
+            card.appendChild(status);
+            
+            return card;
+        }
+
+        function init() {
+            const container = document.getElementById('productContainer');
+            products.forEach(product => {
+                const card = createProductCard(product);
+                container.appendChild(card);
+            });
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html> 
