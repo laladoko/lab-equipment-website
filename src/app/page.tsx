@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import About from './components/About';
+
 import Brands from './components/Brands';
 import BrandStats from './components/BrandStats';
 import Services from './components/Services';
@@ -19,7 +19,6 @@ export default function Home() {
     <main className="min-h-screen">
       <Navbar />
       <Hero />
-      <About />
       <Brands />
       <BrandStats stats={stats} />
       <Services />

@@ -3,13 +3,13 @@
 import { useState } from 'react';
 import { Menu, X, Phone, Mail } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const menuItems = [
     { name: '首页', href: '#home' },
-    { name: '关于我们', href: '#about' },
     { name: '产品品牌', href: '#brands' },
     { name: '服务优势', href: '#services' },
     { name: '联系我们', href: '/contact' },
@@ -22,8 +22,14 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">全谱</span>
+              <div className="relative w-28 h-12">
+                <Image
+                  src="/brands/quanpu-logo-small.png"
+                  alt="杭州全谱实验室设备有限公司"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
               <div className="ml-3">
                 <h1 className="text-xl font-bold text-gray-900">杭州全谱实验室设备</h1>
@@ -94,11 +100,11 @@ export default function Navbar() {
               <div className="pt-4 border-t border-gray-200">
                 <div className="flex items-center text-sm text-gray-600 px-3 py-2">
                   <Phone className="w-4 h-4 mr-2" />
-                  <span>400-888-8888</span>
+                  <span>0571-89988123</span>
                 </div>
                 <div className="flex items-center text-sm text-gray-600 px-3 py-2">
                   <Mail className="w-4 h-4 mr-2" />
-                  <span>info@quanpu-lab.com</span>
+                  <span>13305715395@163.com</span>
                 </div>
               </div>
             </div>

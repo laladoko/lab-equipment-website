@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { 
   Phone, 
   Mail, 
@@ -56,8 +57,13 @@ export default function Footer() {
               viewport={{ once: true }}
             >
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-4">
-                  <span className="text-white font-bold text-xl">全谱</span>
+                <div className="relative w-20 h-14 mr-4">
+                  <Image
+                    src="/brands/quanpu-logo-optimized.png"
+                    alt="杭州全谱实验室设备有限公司"
+                    fill
+                    className="object-contain"
+                  />
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">杭州全谱实验室设备</h3>

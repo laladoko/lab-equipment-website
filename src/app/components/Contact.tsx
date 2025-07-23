@@ -45,7 +45,7 @@ export default function Contact() {
       icon: Clock,
       title: '工作时间',
       content: '周一至周五 9:00-18:00',
-      subtitle: '周六 9:00-12:00'
+      subtitle: '节假日休息'
     }
   ];
 

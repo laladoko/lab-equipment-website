@@ -42,12 +42,12 @@ export default function ContactPage() {
             联系我们
           </motion.h1>
           <motion.p 
-            className="text-xl text-blue-100 max-w-2xl mx-auto"
+            className="text-xl text-blue-100 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            专业的实验室设备供应商，为您提供优质的产品和服务
+            杭州全谱实验室设备有限公司致力于为科研院所、高等院校、医疗机构、企业研发中心等 提供高品质的实验室设备解决方案，是多家国际知名品牌的官方授权代理商。
           </motion.p>
         </div>
       </section>
@@ -69,7 +69,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-1">公司地址</h3>
-                  <p className="text-gray-600">浙江省杭州西湖区博科大厦</p>
+                  <p className="text-gray-600">杭州市三墩西湖科技园西园路9号博科大厦8楼A22</p>
                 </div>
               </div>
 
@@ -79,8 +79,8 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-1">联系电话</h3>
-                  <p className="text-gray-600">+86 571-8888-9999</p>
-                  <p className="text-gray-600">+86 138-0000-0000</p>
+                  <p className="text-gray-600">0571-89988123</p>
+                  <p className="text-gray-600">13305715395</p>
                 </div>
               </div>
 
@@ -90,8 +90,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-1">邮箱地址</h3>
-                  <p className="text-gray-600">info@labequipment.com</p>
-                  <p className="text-gray-600">sales@labequipment.com</p>
+                  <p className="text-gray-600">13305715395@163.com</p>
                 </div>
               </div>
 
@@ -101,8 +100,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-1">工作时间</h3>
-                  <p className="text-gray-600">周一至周五：09:00 - 18:00</p>
-                  <p className="text-gray-600">周六：09:00 - 12:00</p>
+                  <p className="text-gray-600">周一至周五：9:00 - 18:00</p>
                 </div>
               </div>
             </div>
