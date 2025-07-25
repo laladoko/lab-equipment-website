@@ -26,23 +26,30 @@ interface GenericProductShowcaseProps {
 }
 
 export default function GenericProductShowcase({ products, accentColor, onProductClick, brandName }: GenericProductShowcaseProps) {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
 
-  // 获取所有唯一的产品分类
-  const categories = useMemo(() => {
-    const uniqueCategories = [...new Set(products.map(product => product.category))];
-    return uniqueCategories;
+  // 获取所有唯一的产品特点及其计数
+  const allFeaturesWithCount = useMemo(() => {
+    const featuresMap = new Map<string, number>();
+    products.forEach(product => {
+      product.features.forEach(feature => {
+        featuresMap.set(feature, (featuresMap.get(feature) || 0) + 1);
+      });
+    });
+    return Array.from(featuresMap.entries())
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([feature, count]) => ({ feature, count }));
   }, [products]);
 
-  // 根据选中的分类筛选产品
+  // 根据选中的特点筛选产品
   const filteredProducts = useMemo(() => {
-    if (!selectedCategory) return products;
-    return products.filter(product => product.category === selectedCategory);
-  }, [products, selectedCategory]);
+    if (!selectedFeature) return products;
+    return products.filter(product => product.features.includes(selectedFeature));
+  }, [products, selectedFeature]);
 
-  // 处理分类点击
-  const handleCategoryClick = (category: string) => {
-    setSelectedCategory(category === selectedCategory ? null : category);
+  // 处理特点点击
+  const handleFeatureClick = (feature: string) => {
+    setSelectedFeature(feature === selectedFeature ? null : feature);
   };
   return (
     <div className="brand-card rounded-3xl p-8">
@@ -51,28 +58,28 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
         产品展示
       </h3>
       
-      {/* 产品分类筛选 */}
+            {/* 产品特点筛选 */}
       <div className="mb-8">
         <div className="flex flex-wrap gap-3 items-center">
-          {/* 分类标签 */}
-          {categories.map((category) => (
+          {/* 特点标签 */}
+          {allFeaturesWithCount.map(({ feature, count }) => (
             <button
-              key={category}
-              onClick={() => handleCategoryClick(category)}
+              key={feature}
+              onClick={() => handleFeatureClick(feature)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedCategory === category
+                selectedFeature === feature
                   ? 'bg-blue-600 text-white shadow-lg'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              {category}
+              {feature} <span className="ml-1 text-xs opacity-75">({count})</span>
             </button>
           ))}
           
           {/* 全选按钮 - 只在有筛选时显示 */}
-          {selectedCategory && (
+          {selectedFeature && (
             <button
-              onClick={() => setSelectedCategory(null)}
+              onClick={() => setSelectedFeature(null)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-gray-500 text-white hover:bg-gray-600 flex items-center gap-2`}
             >
               <X className="w-4 h-4" />
@@ -82,10 +89,10 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
         </div>
         
         {/* 筛选结果提示 */}
-        {selectedCategory && (
-                     <div className="mt-4 text-sm text-gray-600">
-             显示 &ldquo;{selectedCategory}&rdquo; 分类下的 {filteredProducts.length} 个产品
-           </div>
+        {selectedFeature && (
+          <div className="mt-4 text-sm text-gray-600">
+            显示包含 &ldquo;{selectedFeature}&rdquo; 特点的 {filteredProducts.length} 个产品
+          </div>
         )}
       </div>
       
