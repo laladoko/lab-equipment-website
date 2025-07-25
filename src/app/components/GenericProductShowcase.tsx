@@ -1,9 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, ShoppingCart, X } from 'lucide-react';
+import { ExternalLink, ShoppingCart } from 'lucide-react';
 import ProductImage from './ProductImage';
-import { useState, useMemo } from 'react';
 
 interface GenericProduct {
   id: number;
@@ -26,78 +25,14 @@ interface GenericProductShowcaseProps {
 }
 
 export default function GenericProductShowcase({ products, accentColor, onProductClick, brandName }: GenericProductShowcaseProps) {
-  const [selectedFeature, setSelectedFeature] = useState<string | null>(null);
-
-  // 获取所有唯一的产品特点及其计数
-  const allFeaturesWithCount = useMemo(() => {
-    const featuresMap = new Map<string, number>();
-    products.forEach(product => {
-      product.features.forEach(feature => {
-        featuresMap.set(feature, (featuresMap.get(feature) || 0) + 1);
-      });
-    });
-    return Array.from(featuresMap.entries())
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([feature, count]) => ({ feature, count }));
-  }, [products]);
-
-  // 根据选中的特点筛选产品
-  const filteredProducts = useMemo(() => {
-    if (!selectedFeature) return products;
-    return products.filter(product => product.features.includes(selectedFeature));
-  }, [products, selectedFeature]);
-
-  // 处理特点点击
-  const handleFeatureClick = (feature: string) => {
-    setSelectedFeature(feature === selectedFeature ? null : feature);
-  };
   return (
     <div className="brand-card rounded-3xl p-8">
       <h3 className="text-3xl font-bold text-gray-900 mb-8 flex items-center">
         <ShoppingCart className={`w-8 h-8 mr-3 text-${accentColor}-600`} />
         产品展示
       </h3>
-      
-            {/* 产品特点筛选 */}
-      <div className="mb-8">
-        <div className="flex flex-wrap gap-3 items-center">
-          {/* 特点标签 */}
-          {allFeaturesWithCount.map(({ feature, count }) => (
-            <button
-              key={feature}
-              onClick={() => handleFeatureClick(feature)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                selectedFeature === feature
-                  ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {feature} <span className="ml-1 text-xs opacity-75">({count})</span>
-            </button>
-          ))}
-          
-          {/* 全选按钮 - 只在有筛选时显示 */}
-          {selectedFeature && (
-            <button
-              onClick={() => setSelectedFeature(null)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-gray-500 text-white hover:bg-gray-600 flex items-center gap-2`}
-            >
-              <X className="w-4 h-4" />
-              全选
-            </button>
-          )}
-        </div>
-        
-        {/* 筛选结果提示 */}
-        {selectedFeature && (
-          <div className="mt-4 text-sm text-gray-600">
-            显示包含 &ldquo;{selectedFeature}&rdquo; 特点的 {filteredProducts.length} 个产品
-          </div>
-        )}
-      </div>
-      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {filteredProducts.map((product: GenericProduct, index: number) => (
+        {products.map((product: GenericProduct, index: number) => (
           <motion.div
             key={product.id}
             initial={{ opacity: 0, y: 20 }}

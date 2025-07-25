@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Send, User, MessageSquare, Building2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, User, MessageSquare, Building2 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -119,7 +119,15 @@ ${formData.message}
                 </div>
               </div>
 
-
+              <div className="flex items-start space-x-4">
+                <div className="bg-orange-100 p-3 rounded-lg">
+                  <Clock className="w-6 h-6 text-orange-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-800 mb-1">工作时间</h3>
+                  <p className="text-gray-600">周一至周五：9:00 - 18:00</p>
+                </div>
+              </div>
             </div>
 
             {/* 服务特色 */}
