@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, User, MessageSquare } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, User, MessageSquare, Building2 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -15,9 +15,34 @@ export default function ContactPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 这里可以添加表单提交逻辑
-    console.log('表单提交:', formData);
-    alert('感谢您的咨询，我们会尽快与您联系！');
+    
+    // 构建邮件内容
+    const emailSubject = `来自${formData.company}的咨询 - ${formData.name}`;
+    const emailBody = `
+姓名：${formData.name}
+公司/机构：${formData.company}
+邮箱：${formData.email}
+电话：${formData.phone}
+
+咨询内容：
+${formData.message}
+    `.trim();
+    
+    // 使用mailto协议发送邮件
+    const mailtoLink = `mailto:qiuxiangming@qple.net?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoLink;
+    
+    // 提示用户
+    alert('正在打开邮件客户端发送咨询，感谢您的咨询！');
+    
+    // 清空表单
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      company: '',
+      message: ''
+    });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -90,7 +115,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-1">邮箱地址</h3>
-                  <p className="text-gray-600">13305715395@163.com</p>
+                  <p className="text-gray-600">qiuxiangming@qple.net</p>
                 </div>
               </div>
 
@@ -176,11 +201,12 @@ export default function ContactPage() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       <Phone className="w-4 h-4 inline mr-1" />
-                      电话
+                      电话 *
                     </label>
                     <input
                       type="tel"
                       name="phone"
+                      required
                       value={formData.phone}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
@@ -189,11 +215,13 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      公司/机构
+                      <Building2 className="w-4 h-4 inline mr-1" />
+                      公司/机构 *
                     </label>
                     <input
                       type="text"
                       name="company"
+                      required
                       value={formData.company}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"

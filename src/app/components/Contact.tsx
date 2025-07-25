@@ -5,7 +5,6 @@ import {
   Phone, 
   Mail, 
   MapPin, 
-  Clock, 
   Send,
   Building2,
   User,
@@ -32,7 +31,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: '联系邮箱',
-      content: '13305715395@163.com',
+      content: 'qiuxiangming@qple.net',
       subtitle: 'QQ客服：1794963566'
     },
     {
@@ -41,12 +40,7 @@ export default function Contact() {
       content: '杭州市三墩西湖科技园西园路9号',
       subtitle: '博科大厦8楼'
     },
-    {
-      icon: Clock,
-      title: '工作时间',
-      content: '周一至周五 9:00-18:00',
-      subtitle: '节假日休息'
-    }
+
   ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

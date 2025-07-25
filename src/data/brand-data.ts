@@ -42,9 +42,9 @@ export const brandData: Record<string, BrandData> = {
   },
   'bruker': {
     name: 'BRUKER',
-    description: '世界知名的分析仪器制造商，专注于核磁共振、质谱、X射线分析等高端分析设备',
-    longDescription: 'BRUKER是全球领先的分析仪器制造商，在核磁共振、质谱、X射线分析等领域拥有世界级的技术和产品。我们提供从样品制备到数据分析的完整解决方案。',
-    features: ['核磁共振仪', '质谱仪', 'X射线衍射仪', '分子光谱仪'],
+    description: '世界知名的分析仪器制造商，专注于光谱，核磁共振、质谱、X射线分析等高端分析设备',
+    longDescription: 'BRUKER是全球领先的分析仪器制造商，在光谱，核磁共振、质谱、X射线分析等领域拥有世界级的技术和产品。我们提供从样品制备到数据分析的完整解决方案。',
+    features: ['光谱', '纳米表面仪器', 'X射线', '质谱', '核磁共振', '微生物和诊断'],
     products: [
       'AVANCE III HD 核磁共振仪',
       'MALDI-TOF 质谱仪',

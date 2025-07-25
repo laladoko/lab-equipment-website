@@ -33,6 +33,25 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
+    id: 17,
+    name: 'SENTERRA II 拉曼显微镜',
+    category: '拉曼显微镜',
+    image: '/brands/bruker/senterra-ii-raman-microscope.png',
+    description: 'SENTERRA II是易操作、免维护的共聚焦拉曼显微镜。使用高度自动化的SENTERRA II，可以便捷地在失效分析、质量控制和科学研究中进行拉曼光谱分析和成像。',
+    features: ['全自动化硬件', 'SureCalTM实时校准技术', '快速3D拉曼成像', '一键切换4个内置激光器', '自定义工作流程', '强大的光谱识别功能'],
+    price: '询价',
+    link: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-microscopes/senterra-ii-raman-microscope.html',
+    officialLink: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-microscopes/senterra-ii-raman-microscope.html',
+    specifications: {
+      '激光器': '4个内置激光器',
+      '空间分辨率': '衍射极限级',
+      '校准技术': 'SureCalTM实时校准',
+      '成像功能': '快速3D拉曼成像',
+      '安全等级': 'Class 1激光安全',
+      '合规性': '100% GMP和21 CFR p11合规'
+    }
+  },
+  {
     id: 2,
     name: 'MultiRAM 傅立叶拉曼光谱仪',
     category: '傅立叶拉曼光谱仪',

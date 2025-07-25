@@ -6,7 +6,6 @@ import {
   Phone, 
   Mail, 
   MapPin, 
-  Clock,
   Facebook,
   Twitter,
   Linkedin,
@@ -83,16 +82,13 @@ export default function Footer() {
                  </div>
                  <div className="flex items-center text-gray-300">
                    <Mail className="w-4 h-4 mr-3" />
-                   <span>13305715395@163.com</span>
+                   <span>qiuxiangming@qple.net</span>
                  </div>
                  <div className="flex items-center text-gray-300">
                    <MapPin className="w-4 h-4 mr-3" />
                    <span>杭州市三墩西湖科技园西园路9号博科大厦8楼</span>
                  </div>
-                 <div className="flex items-center text-gray-300">
-                   <Clock className="w-4 h-4 mr-3" />
-                   <span>周一至周五 9:00-18:00</span>
-                 </div>
+
                </div>
             </motion.div>
           </div>
@@ -174,7 +170,17 @@ export default function Footer() {
         >
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {currentYear} 杭州全谱实验室设备有限公司. 保留所有权利.
+              <div>© {currentYear} 杭州全谱实验室设备有限公司. 保留所有权利.</div>
+              <div className="mt-2">
+                <a 
+                  href="https://beian.miit.gov.cn" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-white transition-colors duration-200"
+                >
+                  浙ICP备13034799号-1
+                </a>
+              </div>
             </div>
             
             <div className="flex space-x-4">
