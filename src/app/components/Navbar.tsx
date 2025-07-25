@@ -32,8 +32,8 @@ export default function Navbar() {
                 />
               </div>
               <div className="ml-3">
-                <h1 className="text-xl font-bold text-gray-900">杭州全谱实验室设备</h1>
-                <p className="text-xs text-gray-500">专业实验室器材采购服务</p>
+                <h1 className="text-xl font-bold text-gray-900">杭州全谱实验室设备有限公司</h1>
+                <p className="text-xs text-gray-500">先进仪器设备和专业解决方案</p>
               </div>
             </div>
           </div>

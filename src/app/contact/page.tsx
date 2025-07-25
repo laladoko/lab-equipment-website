@@ -29,7 +29,7 @@ ${formData.message}
     `.trim();
     
     // 使用mailto协议发送邮件
-    const mailtoLink = `mailto:qiuxiangming@qple.net?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    const mailtoLink = `mailto:13305715395@163.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
     window.location.href = mailtoLink;
     
     // 提示用户
@@ -72,7 +72,7 @@ ${formData.message}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            杭州全谱实验室设备有限公司致力于为科研院所、高等院校、医疗机构、企业研发中心等 提供高品质的实验室设备解决方案，是多家国际知名品牌的官方授权代理商。
+            杭州全谱实验室设备有限公司是一家致力于为客户提供先进的仪器设备和专业解决方案的公司。经过十几年的努力深耕，专业服务新材料、5G、半导体、电子、新能源领域和生物发酵、生物制药等行业的科研和企事业单位。
           </motion.p>
         </div>
       </section>
@@ -115,7 +115,7 @@ ${formData.message}
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-800 mb-1">邮箱地址</h3>
-                  <p className="text-gray-600">qiuxiangming@qple.net</p>
+                  <p className="text-gray-600">13305715395@163.com</p>
                 </div>
               </div>
 

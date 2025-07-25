@@ -31,7 +31,7 @@ export default function Contact() {
     {
       icon: Mail,
       title: '联系邮箱',
-      content: 'qiuxiangming@qple.net',
+      content: '13305715395@163.com',
       subtitle: 'QQ客服：1794963566'
     },
     {
@@ -124,24 +124,7 @@ export default function Contact() {
             </div>
 
             {/* Company Info */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6"
-            >
-              <div className="flex items-center mb-4">
-                <Building2 className="w-8 h-8 text-blue-600 mr-3" />
-                <h4 className="text-xl font-bold text-gray-900">公司信息</h4>
-              </div>
-              <div className="space-y-2 text-gray-600">
-                <p><strong>公司名称：</strong>杭州全谱实验室设备有限公司</p>
-                <p><strong>成立时间：</strong>2014年</p>
-                <p><strong>经营范围：</strong>实验室设备采购、技术服务、售后服务</p>
-                <p><strong>服务区域：</strong>全国</p>
-              </div>
-            </motion.div>
+
           </motion.div>
 
           {/* Contact Form */}
