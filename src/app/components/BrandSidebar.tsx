@@ -18,11 +18,11 @@ export default function BrandSidebar({ features, color, accentColor, brandName }
       transition={{ duration: 0.8, delay: 0.2 }}
       className="space-y-6"
     >
-      {/* 产品特点 */}
+      {/* 产品分类 */}
       <div className="brand-card rounded-3xl p-8 sticky top-8">
         <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
           <CheckCircle className={`w-6 h-6 mr-3 text-${accentColor}-600`} />
-          产品特点
+          产品分类
         </h3>
         <div className="space-y-4 mb-8">
           {features.map((feature, index) => (

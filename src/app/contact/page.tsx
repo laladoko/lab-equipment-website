@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, User, MessageSquare, Building2 } from 'lucide-react';
+import { MapPin, Phone, Mail, Send, User, MessageSquare, Building2 } from 'lucide-react';
 import { useState } from 'react';
 
 export default function ContactPage() {
@@ -118,16 +118,6 @@ ${formData.message}
                   <p className="text-gray-600">13305715395@163.com</p>
                 </div>
               </div>
-
-              <div className="flex items-start space-x-4">
-                <div className="bg-orange-100 p-3 rounded-lg">
-                  <Clock className="w-6 h-6 text-orange-600" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-gray-800 mb-1">工作时间</h3>
-                  <p className="text-gray-600">周一至周五：9:00 - 18:00</p>
-                </div>
-              </div>
             </div>
 
             {/* 服务特色 */}
@@ -182,41 +172,8 @@ ${formData.message}
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      <Mail className="w-4 h-4 inline mr-1" />
-                      邮箱 *
-                    </label>
-                    <input
-                      type="email"
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="请输入您的邮箱"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      <Phone className="w-4 h-4 inline mr-1" />
-                      电话 *
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="请输入您的电话"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       <Building2 className="w-4 h-4 inline mr-1" />
-                      公司/机构 *
+                      公司名称 *
                     </label>
                     <input
                       type="text"
@@ -225,7 +182,40 @@ ${formData.message}
                       value={formData.company}
                       onChange={handleChange}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="请输入您的公司或机构"
+                      placeholder="请输入公司名称"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <Mail className="w-4 h-4 inline mr-1" />
+                      邮箱地址 *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="请输入邮箱地址"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <Phone className="w-4 h-4 inline mr-1" />
+                      联系电话 *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      required
+                      value={formData.phone}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      placeholder="请输入联系电话"
                     />
                   </div>
                 </div>

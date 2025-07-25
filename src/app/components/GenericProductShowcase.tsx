@@ -62,9 +62,9 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
                 <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
               </div>
               
-              {/* 产品特点 */}
+              {/* 产品分类 */}
               <div className="mb-4">
-                <h5 className="font-semibold text-gray-900 mb-2 text-sm">产品特点</h5>
+                <h5 className="font-semibold text-gray-900 mb-2 text-sm">产品分类</h5>
                 <div className="flex flex-wrap gap-1">
                   {product.features.slice(0, 3).map((feature: string, idx: number) => (
                     <span

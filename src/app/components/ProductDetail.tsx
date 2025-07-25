@@ -73,13 +73,13 @@ export default function ProductDetail({ product, onClose }: ProductDetailProps) 
               </div>
             </div>
 
-            {/* 右侧：产品特点和规格 */}
+            {/* 右侧：产品分类和规格 */}
             <div className="space-y-6">
-              {/* 产品特点 */}
+              {/* 产品分类 */}
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
                   <CheckCircle className="w-6 h-6 mr-2 text-blue-600" />
-                  产品特点
+                  产品分类
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {product.features.map((feature, index) => (
