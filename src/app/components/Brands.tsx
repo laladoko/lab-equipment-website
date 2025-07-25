@@ -21,7 +21,7 @@ export default function Brands() {
     },
     {
       name: 'BRUKER',
-      description: '世界知名的分析仪器制造商，专注于核磁共振、质谱、X射线分析等高端分析设备',
+      description: '世界知名的分析仪器制造商，专注于光谱，核磁共振、质谱、X射线分析等高端分析设备',
       features: ['核磁共振仪', '质谱仪', 'X射线衍射仪', '分子光谱仪'],
       color: 'from-blue-500 to-blue-600',
       accentColor: 'blue',
