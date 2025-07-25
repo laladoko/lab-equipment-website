@@ -1,8 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, ShoppingCart } from 'lucide-react';
+import { ExternalLink, ShoppingCart, X } from 'lucide-react';
 import ProductImage from './ProductImage';
+import { useState, useMemo } from 'react';
 
 interface GenericProduct {
   id: number;
@@ -25,14 +26,71 @@ interface GenericProductShowcaseProps {
 }
 
 export default function GenericProductShowcase({ products, accentColor, onProductClick, brandName }: GenericProductShowcaseProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+
+  // 获取所有唯一的产品分类
+  const categories = useMemo(() => {
+    const uniqueCategories = [...new Set(products.map(product => product.category))];
+    return uniqueCategories;
+  }, [products]);
+
+  // 根据选中的分类筛选产品
+  const filteredProducts = useMemo(() => {
+    if (!selectedCategory) return products;
+    return products.filter(product => product.category === selectedCategory);
+  }, [products, selectedCategory]);
+
+  // 处理分类点击
+  const handleCategoryClick = (category: string) => {
+    setSelectedCategory(category === selectedCategory ? null : category);
+  };
   return (
     <div className="brand-card rounded-3xl p-8">
       <h3 className="text-3xl font-bold text-gray-900 mb-8 flex items-center">
         <ShoppingCart className={`w-8 h-8 mr-3 text-${accentColor}-600`} />
         产品展示
       </h3>
+      
+      {/* 产品分类筛选 */}
+      <div className="mb-8">
+        <div className="flex flex-wrap gap-3 items-center">
+          {/* 分类标签 */}
+          {categories.map((category) => (
+            <button
+              key={category}
+              onClick={() => handleCategoryClick(category)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                selectedCategory === category
+                  ? 'bg-blue-600 text-white shadow-lg'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+          
+          {/* 全选按钮 - 只在有筛选时显示 */}
+          {selectedCategory && (
+            <button
+              onClick={() => setSelectedCategory(null)}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-gray-500 text-white hover:bg-gray-600 flex items-center gap-2`}
+            >
+              <X className="w-4 h-4" />
+              全选
+            </button>
+          )}
+        </div>
+        
+        {/* 筛选结果提示 */}
+        {selectedCategory && (
+                     <div className="mt-4 text-sm text-gray-600">
+             显示 &ldquo;{selectedCategory}&rdquo; 分类下的 {filteredProducts.length} 个产品
+           </div>
+        )}
+      </div>
+      
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {products.map((product: GenericProduct, index: number) => (
+        {filteredProducts.map((product: GenericProduct, index: number) => (
           <motion.div
             key={product.id}
             initial={{ opacity: 0, y: 20 }}

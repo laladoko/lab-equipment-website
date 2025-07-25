@@ -33,7 +33,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 17,
+    id: 2,
     name: 'SENTERRA II 拉曼显微镜',
     category: '拉曼显微镜',
     image: '/brands/bruker/senterra-ii-raman-microscope.png',
@@ -52,7 +52,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 2,
+    id: 3,
     name: 'MultiRAM 傅立叶拉曼光谱仪',
     category: '傅立叶拉曼光谱仪',
     image: '/brands/bruker/multiram-ft-raman-spectrometer.png',
@@ -71,7 +71,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 3,
+    id: 4,
     name: 'RAM II FT-拉曼模块',
     category: 'FT-拉曼模块',
     image: '/brands/bruker/ram-ii-ft-raman-module.png',
@@ -90,7 +90,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 4,
+    id: 5,
     name: 'INVENIO 傅立叶变换红外光谱平台',
     category: '红外光谱仪',
     image: '/brands/bruker/invenio-ft-ir-platform.png',
@@ -109,7 +109,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 5,
+    id: 6,
     name: 'VERTEX 系列傅立叶变换红外光谱仪',
     category: '红外光谱仪',
     image: '/brands/bruker/vertex-ft-ir-spectrometer.png',
@@ -128,7 +128,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 6,
+    id: 7,
     name: 'IFS 125HR 超高分辨率红外光谱仪',
     category: '红外光谱仪',
     image: '/brands/bruker/ifs125hr-ultra-high-resolution-ft-ir.png',
@@ -147,7 +147,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 7,
+    id: 8,
     name: 'UMT TriboLab',
     category: '材料测试',
     image: '/brands/bruker/umt-tribolab-mechanical-friction-tester.png',
@@ -166,7 +166,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 8,
+    id: 9,
     name: 'TriboLab CMP',
     category: '材料测试',
     image: '/brands/bruker/tribolab-cmp-chemical-mechanical-polishing.png',
@@ -185,7 +185,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 9,
+    id: 10,
     name: 'TriboLab HD',
     category: '材料测试',
     image: '/brands/bruker/tribolab-hd-high-torque-friction-tester.png',
@@ -204,7 +204,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 10,
+    id: 11,
     name: 'Dektak Pro',
     category: '轮廓仪',
     image: '/brands/bruker/dektak-pro-stylus-profiler.png',
@@ -223,7 +223,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 11,
+    id: 12,
     name: 'Dektak XTL 探针式轮廓仪',
     category: '轮廓仪',
     image: '/brands/bruker/dektak-xtl-stylus-profiler-300mm.png',
@@ -242,7 +242,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 12,
+    id: 13,
     name: 'ContourX-100 三维光学轮廓仪',
     category: '三维光学轮廓仪',
     image: '/brands/bruker/contourx-100-3d-optical-profilometer-bruker.png',
@@ -261,7 +261,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 13,
+    id: 14,
     name: 'ContourX-200 三维光学轮廓仪',
     category: '三维光学轮廓仪',
     image: '/brands/bruker/contourx-200-3d-optical-profilometer-bruker.png',
@@ -280,7 +280,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 14,
+    id: 15,
     name: 'ContourX-500 三维光学轮廓仪',
     category: '三维光学轮廓仪',
     image: '/brands/bruker/contourx-500-3d-optical-profilometer-bruker.png',
@@ -299,7 +299,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 15,
+    id: 16,
     name: 'LUMOS II 傅立叶变换红外显微镜',
     category: '红外显微镜',
     image: '/brands/bruker/lumos-ii-ft-ir-microscope.png',
@@ -318,7 +318,7 @@ export const brukerProducts: BrukerProduct[] = [
     }
   },
   {
-    id: 16,
+    id: 17,
     name: 'Dimension Nexus 原子力显微镜',
     category: '原子力显微镜',
     image: '/brands/bruker/dimension-nexus-atomic-force-microscope.png',
