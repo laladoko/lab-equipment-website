@@ -23,7 +23,7 @@ export async function DELETE(request: NextRequest) {
       )
     }
     
-    // 读取现有文件内容
+    // 读取现有文件内容（用于保留文件结构）
     const fileContent = await readFile(dataFilePath, 'utf-8')
     
     // 提取接口定义
@@ -37,28 +37,27 @@ export async function DELETE(request: NextRequest) {
     const applicationAreasMatch = fileContent.match(/export const \w+ApplicationAreas[\s\S]*?(?=export const \w+Products)/g)
     const applicationAreasDef = applicationAreasMatch ? applicationAreasMatch[0] : ''
     
-    // 提取产品数组
-    const arrayMatch = fileContent.match(/export const \w+Products: \w+Product\[\] = (\[[\s\S]*?\]);/)
-    if (!arrayMatch) {
-      return NextResponse.json(
-        { error: '无法解析产品数据文件格式' },
-        { status: 500 }
-      )
-    }
-    
+    // 使用动态导入获取现有产品数据
     let existingProducts
     try {
-      // 安全地解析数组内容
-      const arrayContent = arrayMatch[1]
-      const safeArrayContent = arrayContent
-        .replace(/'/g, '"')
-        .replace(/(\w+):/g, '"$1":')
-        .replace(/,(\s*[}\]])/g, '$1')
+      // 删除require缓存，确保获取最新数据
+      const modulePath = path.join(process.cwd(), 'src', 'data', `${brand}-products.ts`)
+      delete require.cache[modulePath]
       
-      existingProducts = JSON.parse(safeArrayContent)
-    } catch {
+      // 动态导入模块
+      const productModule = await import(`@/data/${brand}-products`)
+      const productKey = `${brand}Products`
+      
+      if (!productModule[productKey]) {
+        throw new Error(`未找到${productKey}导出`)
+      }
+      
+      // 深拷贝现有产品数据
+      existingProducts = JSON.parse(JSON.stringify(productModule[productKey]))
+    } catch (error) {
+      console.error('获取现有产品数据失败:', error)
       return NextResponse.json(
-        { error: '解析现有产品数据失败' },
+        { error: '获取现有产品数据失败' },
         { status: 500 }
       )
     }

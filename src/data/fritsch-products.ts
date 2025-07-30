@@ -1,4 +1,3 @@
-// FRITSCH产品数据 - 基于官方网站真实产品信息
 export interface FritschProduct {
   id: number;
   name: string;
@@ -11,6 +10,31 @@ export interface FritschProduct {
   specifications: Record<string, string>;
   officialLink: string; // 官方产品链接
 }
+
+export const fritschProductCategories = [
+  '行星式球磨机',
+  '微型球磨机',
+  '旋转粉碎机',
+  '刀式研磨机'
+];
+
+// 应用领域
+
+
+export const fritschApplicationAreas = [
+  '材料科学研究',
+  '地质样品制备',
+  '纳米材料制备',
+  '颗粒分析',
+  '质量控制',
+  '粉体工程',
+  '陶瓷工业',
+  '冶金工业',
+  '化工制药'
+];
+
+// 数据查询函数
+
 
 export const fritschProducts: FritschProduct[] = [
   {
@@ -193,38 +217,19 @@ export const fritschProducts: FritschProduct[] = [
       '主盘转速': '50-400rpm',
       '相对传动比': '1:-2.19'
     }
-  }];
-
-// 产品分类
-export const fritschProductCategories = [
-  '行星式球磨机',
-  '微型球磨机',
-  '旋转粉碎机',
-  '刀式研磨机'
+  },
+  {
+    id: 9,
+    name: '测试产品',
+    category: '测试设备',
+    description: '功能测试',
+    features: ['测试'],
+    price: '询价',
+    link: 'https://example.com',
+    officialLink: 'https://example.com',
+    specifications: {
+      '状态': '测试'
+    },
+    image: '/brands/fritsch/products/9-1.jpg'
+  }
 ];
-
-// 应用领域
-export const fritschApplicationAreas = [
-  '材料科学研究',
-  '地质样品制备',
-  '纳米材料制备',
-  '颗粒分析',
-  '质量控制',
-  '粉体工程',
-  '陶瓷工业',
-  '冶金工业',
-  '化工制药'
-];
-
-// 数据查询函数
-export const getFritschProductsByCategory = (category: string) => {
-  return fritschProducts.filter(product => product.category === category);
-};
-
-export const getAllFritschProducts = () => {
-  return fritschProducts;
-};
-
-export const getFritschProductById = (id: number) => {
-  return fritschProducts.find(product => product.id === id);
-}; 

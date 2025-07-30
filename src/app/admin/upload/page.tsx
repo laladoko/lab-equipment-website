@@ -29,7 +29,7 @@ interface Product {
 export default function ProductUploadPage() {
   const [selectedBrand, setSelectedBrand] = useState<string>('')
   const [productData, setProductData] = useState<string>('')
-  const [selectedImages, setSelectedImages] = useState<File[]>([])
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
   const [isUploading, setIsUploading] = useState(false)
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
@@ -40,17 +40,17 @@ export default function ProductUploadPage() {
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
-    if (files) {
-      const fileArray = Array.from(files)
-      setSelectedImages(fileArray)
+    if (files && files[0]) {
+      const file = files[0]
+      setSelectedImage(file)
       
       // 自动更新JSON数据中的image字段
-      updateImageFieldInJson(fileArray)
+      updateImageFieldInJson(file)
     }
   }
 
-  const updateImageFieldInJson = (files: File[]) => {
-    if (!selectedBrand || files.length === 0) return
+  const updateImageFieldInJson = (file: File) => {
+    if (!selectedBrand || !file) return
     
     try {
       let jsonData: Record<string, unknown> = {}
@@ -59,19 +59,12 @@ export default function ProductUploadPage() {
       }
       
       // 生成图片路径
-      const imagePaths = files.map((file, index) => {
-        const fileExtension = file.name.split('.').pop()
-        return `/brands/${selectedBrand}/products/${jsonData.id || 'new'}-${index + 1}.${fileExtension}`
-      })
+      const fileExtension = file.name.split('.').pop()
+      const imagePath = `/brands/${selectedBrand}/products/${jsonData.id || 'new'}-1.${fileExtension}`
       
-      // 根据图片数量设置字段
-      if (files.length === 1) {
-        jsonData.image = imagePaths[0]
-        delete jsonData.images
-      } else {
-        jsonData.images = imagePaths
-        delete jsonData.image
-      }
+      // 设置单张图片字段
+      jsonData.image = imagePath
+      delete jsonData.images // 移除images字段（如果存在）
       
       setProductData(JSON.stringify(jsonData, null, 2))
     } catch {
@@ -109,19 +102,18 @@ export default function ProductUploadPage() {
         }
       }
       
-      // 检查图片字段 - 支持 images 或 image 字段
-      if (!data.images && !data.image) {
-        throw new Error('缺少必填字段: images 或 image')
+      // 检查图片字段 - 只支持 image 字段
+      if (!data.image) {
+        throw new Error('缺少必填字段: image')
       }
       
       // 验证图片字段格式
-      if (data.images && !Array.isArray(data.images)) {
-        throw new Error('images字段必须是数组')
-      }
-      
-      if (data.image && typeof data.image !== 'string') {
+      if (typeof data.image !== 'string') {
         throw new Error('image字段必须是字符串')
       }
+      
+      // 移除images字段（如果存在）
+      delete data.images
       
       return data
     } catch (error) {
@@ -214,7 +206,7 @@ export default function ProductUploadPage() {
       return
     }
     
-    if (selectedImages.length === 0) {
+    if (!selectedImage) {
       setMessage('请选择产品图片')
       setUploadStatus('error')
       return
@@ -233,9 +225,7 @@ export default function ProductUploadPage() {
       formData.append('productData', JSON.stringify(validatedData))
       
       // 添加图片文件
-      selectedImages.forEach((image, index) => {
-        formData.append(`image_${index}`, image)
-      })
+      formData.append('image_0', selectedImage)
       
       // 发送到API
       const response = await fetch('/api/admin/upload-product', {
@@ -254,7 +244,7 @@ export default function ProductUploadPage() {
       
       // 重置表单
       setProductData('')
-      setSelectedImages([])
+      setSelectedImage(null)
       
       // 刷新产品列表
       await fetchExistingProducts(selectedBrand)
@@ -440,11 +430,10 @@ export default function ProductUploadPage() {
                        <span> 或拖拽图片到此处</span>
                      </div>
                      <p className="text-xs text-gray-500">支持 JPG、PNG、WebP 格式</p>
-                     <p className="text-xs text-blue-500">💡 上传后将自动更新JSON中的图片字段</p>
+                     <p className="text-xs text-blue-500">💡 上传后将自动更新JSON中的image字段</p>
                   </div>
                   <input
                     type="file"
-                    multiple
                     accept="image/*"
                     onChange={handleImageUpload}
                     className="hidden"
@@ -454,24 +443,22 @@ export default function ProductUploadPage() {
               </div>
               
               {/* 已选择的图片预览 */}
-              {selectedImages.length > 0 && (
+              {selectedImage && (
                 <div className="mt-4">
                   <p className="text-sm font-medium text-gray-700 mb-2">
-                    已选择 {selectedImages.length} 张图片:
+                    已选择图片:
                   </p>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {selectedImages.map((image, index) => (
-                      <div key={index} className="relative">
-                        <img
-                          src={URL.createObjectURL(image)}
-                          alt={`预览 ${index + 1}`}
-                          className="w-full h-20 object-cover rounded border"
-                        />
-                        <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 rounded-b truncate">
-                          {image.name}
-                        </div>
+                  <div className="w-32">
+                    <div className="relative">
+                      <img
+                        src={URL.createObjectURL(selectedImage)}
+                        alt="预览"
+                        className="w-full h-20 object-cover rounded border"
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-1 rounded-b truncate">
+                        {selectedImage.name}
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </div>
               )}

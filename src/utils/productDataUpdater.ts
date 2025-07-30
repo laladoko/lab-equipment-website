@@ -6,7 +6,7 @@ export interface ProductData {
   name: string
   description: string
   price: string
-  images: string[]
+  image: string
   features?: string[]
   specifications?: Record<string, string>
   category?: string
@@ -117,24 +117,18 @@ export function validateProductData(data: unknown): ProductData {
     }
   }
   
-  // 检查图片字段 - 支持 images 或 image 字段
-  if (!productData.images && !productData.image) {
-    throw new Error('缺少必填字段: images 或 image')
+  // 检查图片字段 - 只支持 image 字段
+  if (!productData.image) {
+    throw new Error('缺少必填字段: image')
   }
   
-  // 如果有image字段但没有images字段，转换为images数组
-  if (productData.image && !productData.images) {
-    if (typeof productData.image === 'string') {
-      productData.images = [productData.image]
-    } else {
-      throw new Error('image字段必须是字符串')
-    }
+  // 确保image是字符串
+  if (typeof productData.image !== 'string') {
+    throw new Error('image字段必须是字符串')
   }
   
-  // 确保images是数组
-  if (productData.images && !Array.isArray(productData.images)) {
-    throw new Error('images字段必须是数组')
-  }
+  // 移除images字段（如果存在）
+  delete productData.images
   
   return productData as ProductData
 } 
