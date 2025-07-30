@@ -34,6 +34,7 @@ export default function LoadingSpinner({
       />
       {text && (
         <motion.p
+          initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
           className="text-sm text-gray-600"

@@ -50,6 +50,7 @@ export default function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <motion.div
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
@@ -93,6 +94,7 @@ export default function Footer() {
 
           {/* Company Links */}
           <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
             viewport={{ once: true }}
@@ -114,6 +116,7 @@ export default function Footer() {
 
           {/* Brand Links */}
           <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
@@ -135,6 +138,7 @@ export default function Footer() {
 
           {/* Service Links */}
           <motion.div
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
@@ -157,6 +161,7 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <motion.div
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: true }}

@@ -42,8 +42,8 @@ export default function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <motion.div
-            initial={{ x: -20 }}
-            whileInView={{ x: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
@@ -78,8 +78,8 @@ export default function About() {
           </motion.div>
 
           <motion.div
-            initial={{ x: 20 }}
-            whileInView={{ x: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
             className="relative"
@@ -90,8 +90,8 @@ export default function About() {
                 {features.map((feature, index) => (
                   <motion.div
                     key={feature.title}
-                    initial={{ y: 20 }}
-                    whileInView={{ y: 0 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     viewport={{ once: true }}
                     className="flex items-start space-x-4"
@@ -120,8 +120,8 @@ export default function About() {
 
         {/* Mission and Vision */}
         <motion.div
-          initial={{ y: 20 }}
-          whileInView={{ y: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
           className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-8"

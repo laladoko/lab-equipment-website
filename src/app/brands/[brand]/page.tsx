@@ -66,6 +66,7 @@ export default function BrandPage() {
           {/* 主要内容 */}
           <div className="lg:col-span-2">
             <motion.div
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               className="space-y-12"

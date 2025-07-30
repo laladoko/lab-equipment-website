@@ -1,9 +1,7 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-  experimental: {
-    optimizePackageImports: ['lucide-react'],
-  },
+  // 基本图片配置
   images: {
     remotePatterns: [
       {
@@ -11,35 +9,13 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+    // 确保浏览器兼容性
+    dangerouslyAllowSVG: true,
+    unoptimized: false,
   },
-  // 增强浏览器兼容性
-  poweredByHeader: false,
-  compress: true,
-  // 添加安全头
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-          {
-            key: 'Referrer-Policy',
-            value: 'strict-origin-when-cross-origin',
-          },
-        ],
-      },
-    ]
+  // 实验性特性配置
+  experimental: {
+    optimizePackageImports: ['lucide-react'],
   },
 }
 

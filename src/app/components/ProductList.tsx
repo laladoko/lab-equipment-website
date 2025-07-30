@@ -20,8 +20,8 @@ export default function ProductList({ products, color, accentColor }: ProductLis
         {products.map((product, index) => (
           <motion.div
             key={product}
-            initial={{ x: -20 }}
-            animate={{ x: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
             className="flex items-center p-6 bg-gradient-to-r from-gray-50 to-white rounded-2xl border border-gray-100 hover:shadow-lg transition-all duration-300 group card-hover"
           >

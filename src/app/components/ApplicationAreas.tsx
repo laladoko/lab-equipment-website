@@ -20,8 +20,8 @@ export default function ApplicationAreas({ applications, color, accentColor }: A
         {applications.map((app, index) => (
           <motion.span
             key={app}
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3, delay: index * 0.1 }}
             className={`px-6 py-3 bg-gradient-to-r ${color} text-white rounded-full text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105`}
           >
