@@ -24,58 +24,27 @@ export async function GET(request: NextRequest) {
       )
     }
     
-    // 读取文件内容
-    const fileContent = await readFile(dataFilePath, 'utf-8')
-    
-    // 提取产品数组
-    const arrayMatch = fileContent.match(/export const \w+Products: \w+Product\[\] = (\[[\s\S]*?\]);/)
-    if (!arrayMatch) {
-      return NextResponse.json(
-        { error: '无法解析产品数据文件格式' },
-        { status: 500 }
-      )
-    }
-    
     let products
     try {
-      // 安全地解析数组内容
-      const arrayContent = arrayMatch[1]
+      // 直接使用动态导入获取产品数据，避免复杂的字符串解析
+      const modulePath = path.join(process.cwd(), 'src', 'data', `${brand}-products.ts`)
       
-      // 更安全的字符串处理
-      let safeArrayContent = arrayContent
-        // 处理单引号
-        .replace(/'/g, '"')
-        // 处理对象键名
-        .replace(/(\w+):/g, '"$1":')
-        // 移除尾随逗号
-        .replace(/,(\s*[}\]])/g, '$1')
-        // 处理特殊字符
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
+      // 删除require缓存，确保获取最新数据
+      delete require.cache[modulePath]
       
-      // 先尝试直接解析
-      try {
-        products = JSON.parse(safeArrayContent)
-      } catch (firstError) {
-        console.error('第一次解析失败:', firstError)
-        console.log('数组内容示例:', arrayContent.substring(0, 300))
-        
-        // 更激进的清理
-        safeArrayContent = arrayContent
-          .replace(/'/g, '"')
-          .replace(/(\w+):/g, '"$1":')
-          .replace(/,(\s*[}\]])/g, '$1')
-          .replace(/\r?\n/g, ' ')
-          .replace(/\s+/g, ' ')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-        
-        products = JSON.parse(safeArrayContent)
+      // 动态导入模块
+      const productModule = await import(`@/data/${brand}-products`)
+      const productKey = `${brand}Products`
+      
+      if (!productModule[productKey]) {
+        throw new Error(`未找到${productKey}导出`)
       }
+      
+      products = productModule[productKey]
     } catch (error) {
-      console.error('解析产品数据失败:', error)
+      console.error('获取产品数据失败:', error)
       return NextResponse.json(
-        { error: '解析产品数据失败', details: error instanceof Error ? error.message : '未知错误' },
+        { error: '获取产品数据失败', details: error instanceof Error ? error.message : '未知错误' },
         { status: 500 }
       )
     }
