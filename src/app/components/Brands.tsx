@@ -64,13 +64,7 @@ export default function Brands() {
       <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-50 rounded-full translate-x-48 translate-y-48 opacity-60"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
+        <div className="text-center mb-20">
           <div className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full text-sm font-semibold mb-8 shadow-lg">
             <Award className="w-5 h-5 mr-2" />
             官方授权代理
@@ -81,16 +75,12 @@ export default function Brands() {
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             我们代理全球顶尖的实验室设备品牌，为您的科研工作提供最优质的产品和专业服务
           </p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {brands.map((brand, index) => (
-            <motion.div
+            <div
               key={brand.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.15 }}
-              viewport={{ once: true }}
               className="group brand-card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500"
             >
               {/* 简化的卡片头部 - 白色背景 */}
@@ -122,48 +112,37 @@ export default function Brands() {
                   </h4>
                   <div className="grid grid-cols-2 gap-3">
                     {brand.features.map((feature, featureIndex) => (
-                      <motion.div
+                      <div
                         key={featureIndex}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: featureIndex * 0.1 }}
                         className="flex items-center p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors group-hover:bg-blue-50"
                       >
                         <div className={`w-2 h-2 bg-gradient-to-r ${brand.color} rounded-full mr-3 flex-shrink-0`}></div>
                         <span className="text-sm text-gray-700 font-medium">{feature}</span>
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </div>
 
                 <div className="pt-4 border-t border-gray-100">
                   <Link href={`/brands/${brand.slug}`}>
-                    <motion.button
-                      whileHover={{ scale: 1.02, y: -2 }}
-                      whileTap={{ scale: 0.98 }}
+                    <button
                       className={`w-full btn-primary text-white py-4 px-6 rounded-xl font-semibold flex items-center justify-center text-sm shadow-lg`}
                     >
                       <span>了解更多</span>
                       <ExternalLink className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </motion.button>
+                    </button>
                   </Link>
                 </div>
               </div>
 
               {/* 悬停效果覆盖层 */}
               <div className="absolute inset-0 bg-gradient-to-br from-transparent to-black/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* 为什么选择我们部分 */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
+        <div className="mt-20">
           <div className="bg-white rounded-3xl shadow-xl p-12 max-w-6xl mx-auto border border-gray-100 relative overflow-hidden">
             {/* 背景装饰 */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 rounded-full -translate-y-32 translate-x-32"></div>
@@ -180,45 +159,33 @@ export default function Brands() {
               </div>
               
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <motion.div 
-                  className="text-center group"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div className="text-center group">
                   <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <Award className="w-10 h-10 text-white" />
                   </div>
                   <h4 className="font-bold text-gray-900 mb-3 text-lg">官方授权</h4>
                   <p className="text-gray-600 leading-relaxed">获得品牌官方授权，确保产品正品质量和售后服务保障</p>
-                </motion.div>
+                </div>
                 
-                <motion.div 
-                  className="text-center group"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div className="text-center group">
                   <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <Settings className="w-10 h-10 text-white" />
                   </div>
                   <h4 className="font-bold text-gray-900 mb-3 text-lg">技术支持</h4>
                   <p className="text-gray-600 leading-relaxed">专业的技术团队提供安装调试、培训指导和售后维护服务</p>
-                </motion.div>
+                </div>
                 
-                <motion.div 
-                  className="text-center group"
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3 }}
-                >
+                <div className="text-center group">
                   <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <Beaker className="w-10 h-10 text-white" />
                   </div>
                   <h4 className="font-bold text-gray-900 mb-3 text-lg">一站式服务</h4>
                   <p className="text-gray-600 leading-relaxed">从选型咨询到安装调试，从人员培训到维护保养，全程专业服务</p>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
