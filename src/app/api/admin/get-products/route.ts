@@ -40,15 +40,42 @@ export async function GET(request: NextRequest) {
     try {
       // 安全地解析数组内容
       const arrayContent = arrayMatch[1]
-      const safeArrayContent = arrayContent
-        .replace(/'/g, '"')
-        .replace(/(\w+):/g, '"$1":')
-        .replace(/,(\s*[}\]])/g, '$1')
       
-      products = JSON.parse(safeArrayContent)
-    } catch {
+      // 更安全的字符串处理
+      let safeArrayContent = arrayContent
+        // 处理单引号
+        .replace(/'/g, '"')
+        // 处理对象键名
+        .replace(/(\w+):/g, '"$1":')
+        // 移除尾随逗号
+        .replace(/,(\s*[}\]])/g, '$1')
+        // 处理特殊字符
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+      
+      // 先尝试直接解析
+      try {
+        products = JSON.parse(safeArrayContent)
+      } catch (firstError) {
+        console.error('第一次解析失败:', firstError)
+        console.log('数组内容示例:', arrayContent.substring(0, 300))
+        
+        // 更激进的清理
+        safeArrayContent = arrayContent
+          .replace(/'/g, '"')
+          .replace(/(\w+):/g, '"$1":')
+          .replace(/,(\s*[}\]])/g, '$1')
+          .replace(/\r?\n/g, ' ')
+          .replace(/\s+/g, ' ')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+        
+        products = JSON.parse(safeArrayContent)
+      }
+    } catch (error) {
+      console.error('解析产品数据失败:', error)
       return NextResponse.json(
-        { error: '解析产品数据失败' },
+        { error: '解析产品数据失败', details: error instanceof Error ? error.message : '未知错误' },
         { status: 500 }
       )
     }

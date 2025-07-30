@@ -100,16 +100,27 @@ export default function ProductUploadPage() {
   const validateProductData = () => {
     try {
       const data = JSON.parse(productData)
-      const required = ['id', 'name', 'description', 'price', 'images']
+      const required = ['id', 'name', 'description', 'price']
       
+      // 检查基本必填字段
       for (const field of required) {
         if (!data[field]) {
           throw new Error(`缺少必填字段: ${field}`)
         }
       }
       
-      if (!Array.isArray(data.images)) {
+      // 检查图片字段 - 支持 images 或 image 字段
+      if (!data.images && !data.image) {
+        throw new Error('缺少必填字段: images 或 image')
+      }
+      
+      // 验证图片字段格式
+      if (data.images && !Array.isArray(data.images)) {
         throw new Error('images字段必须是数组')
+      }
+      
+      if (data.image && typeof data.image !== 'string') {
+        throw new Error('image字段必须是字符串')
       }
       
       return data
