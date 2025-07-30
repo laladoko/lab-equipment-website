@@ -57,7 +57,7 @@ export async function updateProductData(brand: string, newProduct: ProductData):
     // 先尝试直接解析
     try {
       existingProducts = JSON.parse(safeArrayContent)
-    } catch (firstError) {
+    } catch {
       // 如果失败，尝试更激进的清理
       safeArrayContent = arrayContent
         .replace(/'/g, '"')
@@ -130,15 +130,31 @@ export function validateProductData(data: unknown): ProductData {
   }
   
   const productData = data as Record<string, unknown>
-  const required = ['id', 'name', 'description', 'price', 'images']
+  const required = ['id', 'name', 'description', 'price']
   
+  // 检查基本必填字段
   for (const field of required) {
     if (!productData[field]) {
       throw new Error(`缺少必填字段: ${field}`)
     }
   }
   
-  if (!Array.isArray(productData.images)) {
+  // 检查图片字段 - 支持 images 或 image 字段
+  if (!productData.images && !productData.image) {
+    throw new Error('缺少必填字段: images 或 image')
+  }
+  
+  // 如果有image字段但没有images字段，转换为images数组
+  if (productData.image && !productData.images) {
+    if (typeof productData.image === 'string') {
+      productData.images = [productData.image]
+    } else {
+      throw new Error('image字段必须是字符串')
+    }
+  }
+  
+  // 确保images是数组
+  if (productData.images && !Array.isArray(productData.images)) {
     throw new Error('images字段必须是数组')
   }
   
