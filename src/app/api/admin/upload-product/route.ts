@@ -29,16 +29,6 @@ export async function POST(request: NextRequest) {
       )
     }
     
-    // 验证产品数据
-    try {
-      productData = validateProductData(productData)
-    } catch (error) {
-      return NextResponse.json(
-        { error: error instanceof Error ? error.message : '数据验证失败' },
-        { status: 400 }
-      )
-    }
-    
     // 创建品牌产品目录
     const brandDir = path.join(process.cwd(), 'public', 'brands', brand, 'products')
     if (!existsSync(brandDir)) {
@@ -69,7 +59,25 @@ export async function POST(request: NextRequest) {
     }
     
     // 更新产品数据中的图片路径
-    productData.images = uploadedImages
+    if (uploadedImages.length > 0) {
+      if (uploadedImages.length === 1) {
+        productData.image = uploadedImages[0]
+        delete productData.images
+      } else {
+        productData.images = uploadedImages
+        delete productData.image
+      }
+    }
+    
+    // 验证产品数据（在处理图片后）
+    try {
+      productData = validateProductData(productData)
+    } catch (error) {
+      return NextResponse.json(
+        { error: error instanceof Error ? error.message : '数据验证失败' },
+        { status: 400 }
+      )
+    }
     
     // 检查产品数据文件是否存在
     const dataFilePath = path.join(process.cwd(), 'src', 'data', `${brand}-products.ts`)
