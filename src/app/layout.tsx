@@ -24,7 +24,45 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
+      <head>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            /* 紧急修复：强制显示内容 */
+            body { display: block !important; opacity: 1 !important; visibility: visible !important; }
+            main { display: block !important; opacity: 1 !important; visibility: visible !important; }
+            * { opacity: 1 !important; visibility: visible !important; }
+            .min-h-screen { min-height: 100vh; }
+            .relative { position: relative; }
+            .flex { display: flex; }
+            .items-center { align-items: center; }
+            .justify-center { justify-content: center; }
+            .text-center { text-align: center; }
+            .text-4xl { font-size: 2.25rem; }
+            .font-bold { font-weight: bold; }
+            .text-gray-900 { color: #111827; }
+            .text-blue-600 { color: #2563eb; }
+            .mb-6 { margin-bottom: 1.5rem; }
+            .mb-8 { margin-bottom: 2rem; }
+            .mb-12 { margin-bottom: 3rem; }
+            .px-8 { padding-left: 2rem; padding-right: 2rem; }
+            .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+            .bg-blue-600 { background-color: #2563eb; }
+            .text-white { color: white; }
+            .rounded-lg { border-radius: 0.5rem; }
+          `
+        }} />
+      </head>
       <body className={inter.className}>
+        <noscript>
+          <div style={{
+            padding: '20px',
+            textAlign: 'center',
+            fontFamily: 'Arial, sans-serif'
+          }}>
+            <h1>杭州全谱实验室设备有限公司</h1>
+            <p>请启用JavaScript以获得完整体验，或使用支持现代Web标准的浏览器。</p>
+          </div>
+        </noscript>
         {children}
       </body>
     </html>

@@ -69,11 +69,38 @@
 body {
   opacity: 1 !important;
   visibility: visible !important;
+  display: block !important;
 }
 
 main {
   opacity: 1 !important;
   visibility: visible !important;
+  display: block !important;
+}
+
+/* 强制显示所有主要内容元素 */
+section, div, h1, h2, h3, p, a, nav {
+  opacity: 1 !important;
+  visibility: visible !important;
+  display: block !important;
+}
+
+/* 修复flex布局 */
+.flex {
+  display: flex !important;
+}
+
+.grid {
+  display: grid !important;
+}
+
+/* 确保基础样式 */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
 }
 
 /* 禁用可能导致问题的动画 */
