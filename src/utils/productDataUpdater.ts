@@ -16,7 +16,7 @@ export interface ProductData {
 export async function updateProductData(brand: string, newProduct: ProductData): Promise<void> {
   const dataFilePath = path.join(process.cwd(), 'src', 'data', `${brand}-products.ts`)
   
-  // 读取现有文件内容
+  // 读取现有文件内容（用于保留文件结构）
   const fileContent = await readFile(dataFilePath, 'utf-8')
   
   // 提取接口定义
@@ -30,48 +30,26 @@ export async function updateProductData(brand: string, newProduct: ProductData):
   const applicationAreasMatch = fileContent.match(/export const \w+ApplicationAreas[\s\S]*?(?=export const \w+Products)/g)
   const applicationAreasDef = applicationAreasMatch ? applicationAreasMatch[0] : ''
   
-  // 提取产品数组
-  const arrayMatch = fileContent.match(/export const \w+Products(?:: \w+Product\[\])? = (\[[\s\S]*?\]);/)
-  if (!arrayMatch) {
-    throw new Error('无法解析产品数据文件格式')
-  }
-  
+  // 使用动态导入获取现有产品数据
   let existingProducts: ProductData[]
   try {
-    // 安全地解析数组内容
-    const arrayContent = arrayMatch[1]
+    // 删除require缓存，确保获取最新数据
+    const modulePath = path.join(process.cwd(), 'src', 'data', `${brand}-products.ts`)
+    delete require.cache[modulePath]
     
-    // 更详细的字符串清理和转换
-    let safeArrayContent = arrayContent
-      // 处理单引号
-      .replace(/'/g, '"')
-      // 处理对象键名
-      .replace(/(\w+):/g, '"$1":')
-      // 移除尾随逗号
-      .replace(/,(\s*[}\]])/g, '$1')
-      // 处理多行字符串中的换行符
-      .replace(/\n/g, '\\n')
-      // 处理字符串中的双引号
-      .replace(/\\"/g, '\\"')
+    // 动态导入模块
+    const productModule = await import(`@/data/${brand}-products`)
+    const productKey = `${brand}Products`
     
-    // 先尝试直接解析
-    try {
-      existingProducts = JSON.parse(safeArrayContent)
-    } catch {
-      // 如果失败，尝试更激进的清理
-      safeArrayContent = arrayContent
-        .replace(/'/g, '"')
-        .replace(/(\w+):/g, '"$1":')
-        .replace(/,(\s*[}\]])/g, '$1')
-        .replace(/\r?\n/g, ' ')
-        .replace(/\s+/g, ' ')
-      
-      existingProducts = JSON.parse(safeArrayContent)
+    if (!productModule[productKey]) {
+      throw new Error(`未找到${productKey}导出`)
     }
+    
+    // 深拷贝现有产品数据
+    existingProducts = JSON.parse(JSON.stringify(productModule[productKey]))
   } catch (error) {
-    console.error('解析错误详情:', error)
-    console.error('数组内容:', arrayMatch[1].substring(0, 500) + '...')
-    throw new Error('解析现有产品数据失败')
+    console.error('获取现有产品数据失败:', error)
+    throw new Error('获取现有产品数据失败')
   }
   
   // 检查产品ID是否已存在
