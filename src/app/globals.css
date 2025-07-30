@@ -2,6 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Safari 兼容性修复 */
+@supports (-webkit-appearance: none) {
+  /* Safari 特定样式 */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* 修复 Safari 中的 flex 布局问题 */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+  
+  /* 修复 Safari 中的 transform 问题 */
+  [style*="transform"] {
+    -webkit-transform: var(--tw-transform);
+    transform: var(--tw-transform);
+  }
+  
+  /* 修复 Safari 中的 backdrop-filter 问题 */
+  .backdrop-blur-md {
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+  
+  /* 修复 Safari 中的 gradient 问题 */
+  .bg-gradient-to-r,
+  .bg-gradient-to-br,
+  .bg-gradient-to-l {
+    background: -webkit-linear-gradient(var(--tw-gradient-stops));
+    background: linear-gradient(var(--tw-gradient-stops));
+  }
+  
+  /* 修复 Safari 中的动画问题 */
+  @keyframes blob {
+    0% {
+      transform: translate(0px, 0px) scale(1);
+    }
+    33% {
+      transform: translate(30px, -50px) scale(1.1);
+    }
+    66% {
+      transform: translate(-20px, 20px) scale(0.9);
+    }
+    100% {
+      transform: translate(0px, 0px) scale(1);
+    }
+  }
+  
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+  
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+}
+
+/* 强制显示内容 - 防止加载时隐藏 */
+body {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+main {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 禁用可能导致问题的动画 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 255, 255, 255;
