@@ -6,7 +6,7 @@ export interface ProductData {
   name: string
   description: string
   price: string
-  image: string
+  image?: string
   features?: string[]
   specifications?: Record<string, string>
   category?: string
@@ -117,13 +117,8 @@ export function validateProductData(data: unknown): ProductData {
     }
   }
   
-  // 检查图片字段 - 只支持 image 字段
-  if (!productData.image) {
-    throw new Error('缺少必填字段: image')
-  }
-  
-  // 确保image是字符串
-  if (typeof productData.image !== 'string') {
+  // 检查图片字段 - image字段可选，但如果存在必须是字符串
+  if (productData.image && typeof productData.image !== 'string') {
     throw new Error('image字段必须是字符串')
   }
   

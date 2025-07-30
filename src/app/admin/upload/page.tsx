@@ -102,13 +102,8 @@ export default function ProductUploadPage() {
         }
       }
       
-      // 检查图片字段 - 只支持 image 字段
-      if (!data.image) {
-        throw new Error('缺少必填字段: image')
-      }
-      
-      // 验证图片字段格式
-      if (typeof data.image !== 'string') {
+      // 检查图片字段 - image字段在有上传文件时是必需的，没有上传文件时可选
+      if (data.image && typeof data.image !== 'string') {
         throw new Error('image字段必须是字符串')
       }
       
@@ -211,11 +206,7 @@ export default function ProductUploadPage() {
       return
     }
     
-    if (!selectedImage) {
-      setMessage('请选择产品图片')
-      setUploadStatus('error')
-      return
-    }
+    // 图片选择变为可选的
 
     try {
       setIsUploading(true)
@@ -229,8 +220,10 @@ export default function ProductUploadPage() {
       formData.append('brand', selectedBrand)
       formData.append('productData', JSON.stringify(validatedData))
       
-      // 添加图片文件
-      formData.append('image_0', selectedImage)
+      // 添加图片文件（如果有的话）
+      if (selectedImage) {
+        formData.append('image_0', selectedImage)
+      }
       
       // 发送到API
       const response = await fetch('/api/admin/upload-product', {
@@ -427,7 +420,7 @@ export default function ProductUploadPage() {
             {/* 图片上传 */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                产品图片 *
+                产品图片 (可选)
               </label>
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-400 transition-colors">
                 <label className="cursor-pointer">
@@ -438,14 +431,14 @@ export default function ProductUploadPage() {
                        <span> 或拖拽图片到此处</span>
                      </div>
                      <p className="text-xs text-gray-500">支持 JPG、PNG、WebP 格式</p>
-                     <p className="text-xs text-blue-500">💡 上传后将自动更新JSON中的image字段</p>
+                     <p className="text-xs text-blue-500">💡 上传图片将自动更新JSON中的image字段</p>
+                     <p className="text-xs text-gray-500">💡 不上传图片时保持现有图片路径不变</p>
                   </div>
                   <input
                     type="file"
                     accept="image/*"
                     onChange={handleImageUpload}
                     className="hidden"
-                    required
                   />
                 </label>
               </div>
