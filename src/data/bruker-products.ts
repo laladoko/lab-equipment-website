@@ -27,6 +27,8 @@ export const brukerProductCategories = [
 // 应用领域
 
 
+
+
 export const brukerApplicationAreas = [
   '材料科学',
   '药物研发',
@@ -41,6 +43,8 @@ export const brukerApplicationAreas = [
 ];
 
 // 数据查询函数
+
+
 
 
 export const brukerProducts: BrukerProduct[] = [
@@ -70,7 +74,7 @@ export const brukerProducts: BrukerProduct[] = [
     image: '/brands/bruker/senterra-ii-raman-microscope.png',
     description: 'SENTERRA II是易操作、免维护的共聚焦拉曼显微镜。使用高度自动化的SENTERRA II，可以便捷地在失效分析、质量控制和科学研究中进行拉曼光谱分析和成像。',
     features: ['全自动化硬件', 'SureCalTM实时校准技术', '快速3D拉曼成像', '一键切换4个内置激光器', '自定义工作流程', '强大的光谱识别功能'],
-    price: '询价',
+    price: '询价喵',
     link: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-microscopes/senterra-ii-raman-microscope.html',
     officialLink: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-microscopes/senterra-ii-raman-microscope.html',
     specifications: {

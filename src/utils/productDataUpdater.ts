@@ -79,18 +79,23 @@ export const ${brand}Products: ${brandCapitalized}Product[] = ${productsArrayStr
 }
 
 function formatProductsArray(products: ProductData[]): string {
+  // 辅助函数：转义字符串中的单引号
+  const escapeString = (str: string): string => {
+    return str.replace(/'/g, "\\'")
+  }
+
   const formatted = products.map(product => {
     const entries = Object.entries(product).map(([key, value]) => {
       if (Array.isArray(value)) {
-        const arrayItems = value.map(item => `'${item}'`).join(', ')
+        const arrayItems = value.map(item => `'${escapeString(String(item))}'`).join(', ')
         return `    ${key}: [${arrayItems}]`
       } else if (typeof value === 'object' && value !== null) {
         const objectEntries = Object.entries(value)
-          .map(([k, v]) => `      '${k}': '${v}'`)
+          .map(([k, v]) => `      '${escapeString(String(k))}': '${escapeString(String(v))}'`)
           .join(',\n')
         return `    ${key}: {\n${objectEntries}\n    }`
       } else if (typeof value === 'string') {
-        return `    ${key}: '${value}'`
+        return `    ${key}: '${escapeString(value)}'`
       } else {
         return `    ${key}: ${value}`
       }
