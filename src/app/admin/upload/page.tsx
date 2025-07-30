@@ -41,7 +41,41 @@ export default function ProductUploadPage() {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (files) {
-      setSelectedImages(Array.from(files))
+      const fileArray = Array.from(files)
+      setSelectedImages(fileArray)
+      
+      // 自动更新JSON数据中的image字段
+      updateImageFieldInJson(fileArray)
+    }
+  }
+
+  const updateImageFieldInJson = (files: File[]) => {
+    if (!selectedBrand || files.length === 0) return
+    
+    try {
+      let jsonData: Record<string, unknown> = {}
+      if (productData.trim()) {
+        jsonData = JSON.parse(productData)
+      }
+      
+      // 生成图片路径
+      const imagePaths = files.map((file, index) => {
+        const fileExtension = file.name.split('.').pop()
+        return `/brands/${selectedBrand}/products/${jsonData.id || 'new'}-${index + 1}.${fileExtension}`
+      })
+      
+      // 根据图片数量设置字段
+      if (files.length === 1) {
+        jsonData.image = imagePaths[0]
+        delete jsonData.images
+      } else {
+        jsonData.images = imagePaths
+        delete jsonData.image
+      }
+      
+      setProductData(JSON.stringify(jsonData, null, 2))
+    } catch {
+      console.warn('无法解析JSON数据，跳过自动更新')
     }
   }
 
@@ -390,11 +424,12 @@ export default function ProductUploadPage() {
                 <label className="cursor-pointer">
                   <div className="space-y-2">
                     <Image className="w-12 h-12 text-gray-400 mx-auto" />
-                    <div className="text-sm text-gray-600">
-                      <span className="text-blue-600 hover:text-blue-500">点击选择图片</span>
-                      <span> 或拖拽图片到此处</span>
-                    </div>
-                    <p className="text-xs text-gray-500">支持 JPG、PNG、WebP 格式</p>
+                                         <div className="text-sm text-gray-600">
+                       <span className="text-blue-600 hover:text-blue-500">点击选择图片</span>
+                       <span> 或拖拽图片到此处</span>
+                     </div>
+                     <p className="text-xs text-gray-500">支持 JPG、PNG、WebP 格式</p>
+                     <p className="text-xs text-blue-500">💡 上传后将自动更新JSON中的图片字段</p>
                   </div>
                   <input
                     type="file"
