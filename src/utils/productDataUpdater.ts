@@ -31,7 +31,7 @@ export async function updateProductData(brand: string, newProduct: ProductData):
   const applicationAreasDef = applicationAreasMatch ? applicationAreasMatch[0] : ''
   
   // 提取产品数组
-  const arrayMatch = fileContent.match(/export const \w+Products: \w+Product\[\] = (\[[\s\S]*?\]);/)
+  const arrayMatch = fileContent.match(/export const \w+Products(?:: \w+Product\[\])? = (\[[\s\S]*?\]);/)
   if (!arrayMatch) {
     throw new Error('无法解析产品数据文件格式')
   }
@@ -40,13 +40,37 @@ export async function updateProductData(brand: string, newProduct: ProductData):
   try {
     // 安全地解析数组内容
     const arrayContent = arrayMatch[1]
-    const safeArrayContent = arrayContent
-      .replace(/'/g, '"')
-      .replace(/(\w+):/g, '"$1":')
-      .replace(/,(\s*[}\]])/g, '$1')
     
-    existingProducts = JSON.parse(safeArrayContent)
-  } catch {
+    // 更详细的字符串清理和转换
+    let safeArrayContent = arrayContent
+      // 处理单引号
+      .replace(/'/g, '"')
+      // 处理对象键名
+      .replace(/(\w+):/g, '"$1":')
+      // 移除尾随逗号
+      .replace(/,(\s*[}\]])/g, '$1')
+      // 处理多行字符串中的换行符
+      .replace(/\n/g, '\\n')
+      // 处理字符串中的双引号
+      .replace(/\\"/g, '\\"')
+    
+    // 先尝试直接解析
+    try {
+      existingProducts = JSON.parse(safeArrayContent)
+    } catch (firstError) {
+      // 如果失败，尝试更激进的清理
+      safeArrayContent = arrayContent
+        .replace(/'/g, '"')
+        .replace(/(\w+):/g, '"$1":')
+        .replace(/,(\s*[}\]])/g, '$1')
+        .replace(/\r?\n/g, ' ')
+        .replace(/\s+/g, ' ')
+      
+      existingProducts = JSON.parse(safeArrayContent)
+    }
+  } catch (error) {
+    console.error('解析错误详情:', error)
+    console.error('数组内容:', arrayMatch[1].substring(0, 500) + '...')
     throw new Error('解析现有产品数据失败')
   }
   
