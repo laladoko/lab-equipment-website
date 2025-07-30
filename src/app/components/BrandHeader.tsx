@@ -28,8 +28,8 @@ export default function BrandHeader({ brand }: BrandHeaderProps) {
             {/* 放大的Logo - 紧凑容器 */}
             <motion.div 
               className="flex items-center justify-center flex-shrink-0"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ scale: 0.8 }}
+              animate={{ scale: 1 }}
               transition={{ duration: 0.8 }}
             >
               <BrandLogo brandName={brand.name} size={300} animated={true} />
@@ -37,8 +37,8 @@ export default function BrandHeader({ brand }: BrandHeaderProps) {
             
             <div className="text-center lg:text-left flex-1">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ y: 20 }}
+                animate={{ y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">{brand.name}</h1>

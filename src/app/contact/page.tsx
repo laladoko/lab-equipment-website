@@ -60,16 +60,16 @@ ${formData.message}
         <div className="relative container mx-auto px-6 text-center">
           <motion.h1 
             className="text-5xl font-bold mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 30 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8 }}
           >
             联系我们
           </motion.h1>
           <motion.p 
             className="text-xl text-blue-100 max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 30 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             杭州全谱实验室设备有限公司是一家致力于为客户提供先进的仪器设备和专业解决方案的公司。经过十几年的努力深耕，专业服务新材料、5G、半导体、电子、新能源领域和生物发酵、生物制药等行业的科研和企事业单位。
@@ -81,8 +81,8 @@ ${formData.message}
         <div className="grid lg:grid-cols-2 gap-16">
           {/* 联系信息 */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: -50 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl font-bold text-gray-800 mb-8">联系信息</h2>
@@ -146,8 +146,8 @@ ${formData.message}
 
           {/* 联系表单 */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ x: 50 }}
+            animate={{ x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <div className="bg-white rounded-2xl shadow-xl p-8">

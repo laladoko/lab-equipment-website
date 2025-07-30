@@ -13,8 +13,8 @@ interface BrandSidebarProps {
 export default function BrandSidebar({ features, color, accentColor, brandName }: BrandSidebarProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, x: 30 }}
-      animate={{ opacity: 1, x: 0 }}
+      initial={{ x: 30 }}
+      animate={{ x: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
       className="space-y-6"
     >
@@ -29,8 +29,8 @@ export default function BrandSidebar({ features, color, accentColor, brandName }
             <motion.div 
               key={feature} 
               className="flex items-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors"
-              initial={{ opacity: 0, x: -10 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ x: -10 }}
+              animate={{ x: 0 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
               <div className={`w-3 h-3 bg-gradient-to-r ${color} rounded-full mr-4 flex-shrink-0`}></div>

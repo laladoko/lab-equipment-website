@@ -22,8 +22,8 @@ export default function ProductShowcase({ products, accentColor, onProductClick 
         {products.map((product: OlympusProduct, index: number) => (
           <motion.div
             key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ y: 20 }}
+            animate={{ y: 0 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 group cursor-pointer"
             onClick={() => onProductClick(product)}
