@@ -41,6 +41,10 @@ npm install
 log_info "🏗️ 使用兼容性模式构建..."
 NODE_ENV=production npm run build
 
+# 检查SSH连接
+log_info "检查服务器连接..."
+log_info "使用SSH密钥进行连接..."
+
 # 远程部署
 log_info "🚀 开始远程部署..."
 

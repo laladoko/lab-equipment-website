@@ -33,7 +33,7 @@ log_error() {
 
 # 检查SSH连接
 log_info "检查服务器连接..."
-log_info "请输入服务器密码进行连接..."
+log_info "使用SSH密钥进行连接..."
 
 # 远程部署函数
 remote_deploy() {

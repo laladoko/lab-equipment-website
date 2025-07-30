@@ -95,24 +95,24 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
                         <a
                           href="/contact"
                           className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-600 to-green-700 text-white text-sm font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-                          onClick={(e) => e.stopPropagation()}
-                        >
+                    onClick={(e) => e.stopPropagation()}
+                  >
                           <ExternalLink className="w-4 h-4 mr-2" />
                           联系我们
-                        </a>
+                  </a>
                       );
                     } else {
                       return (
-                        <a
-                          href={product.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink className="w-4 h-4 mr-2" />
-                          查看详情
-                        </a>
+                  <a
+                    href={product.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    查看详情
+                  </a>
                       );
                     }
                   })()}
