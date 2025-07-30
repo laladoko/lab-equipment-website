@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion';
 import { ExternalLink, Award, Microscope, Beaker, Settings, CheckCircle } from 'lucide-react';
 import BrandLogo from './BrandLogo';
 import Link from 'next/link';
@@ -78,7 +78,7 @@ export default function Brands() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {brands.map((brand, index) => (
+          {brands.map((brand) => (
             <div
               key={brand.name}
               className="group brand-card rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500"
