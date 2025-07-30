@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Upload, FileText, Image, Save, AlertCircle, CheckCircle } from 'lucide-react'
+import { Upload, FileText, Image, Save, AlertCircle, CheckCircle, Trash2, Search } from 'lucide-react'
 
 interface Brand {
   id: string
@@ -16,6 +16,16 @@ const brands: Brand[] = [
   { id: 'fritsch', name: 'FRITSCH', slug: 'fritsch' }
 ]
 
+interface Product {
+  id: number | string
+  name: string
+  description: string
+  price: string
+  images: string[]
+  features?: string[]
+  specifications?: Record<string, string>
+}
+
 export default function ProductUploadPage() {
   const [selectedBrand, setSelectedBrand] = useState<string>('')
   const [productData, setProductData] = useState<string>('')
@@ -23,6 +33,10 @@ export default function ProductUploadPage() {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'success' | 'error'>('idle')
   const [message, setMessage] = useState('')
+  const [existingProducts, setExistingProducts] = useState<Product[]>([])
+  const [showProductList, setShowProductList] = useState(false)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [isDeleting, setIsDeleting] = useState<string | number | null>(null)
 
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
@@ -69,6 +83,76 @@ export default function ProductUploadPage() {
       throw new Error(`JSON数据验证失败: ${error instanceof Error ? error.message : '未知错误'}`)
     }
   }
+
+  const fetchExistingProducts = async (brand: string) => {
+    try {
+      const response = await fetch(`/api/admin/get-products?brand=${brand}`)
+      if (response.ok) {
+        const data = await response.json()
+        setExistingProducts(data.products || [])
+      }
+    } catch (error) {
+      console.error('获取产品列表失败:', error)
+    }
+  }
+
+  const handleBrandChange = (brand: string) => {
+    setSelectedBrand(brand)
+    if (brand) {
+      fetchExistingProducts(brand)
+    } else {
+      setExistingProducts([])
+    }
+  }
+
+  const handleDeleteProduct = async (productId: string | number) => {
+    if (!selectedBrand) return
+    
+    if (!confirm(`确定要删除产品 ID: ${productId} 吗？此操作不可恢复。`)) {
+      return
+    }
+
+    try {
+      setIsDeleting(productId)
+      const response = await fetch('/api/admin/delete-product', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          brand: selectedBrand,
+          productId: productId
+        })
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || '删除失败')
+      }
+
+      setMessage(`产品 ID: ${productId} 删除成功`)
+      setUploadStatus('success')
+      
+      // 刷新产品列表
+      await fetchExistingProducts(selectedBrand)
+      
+    } catch (error) {
+      setMessage(error instanceof Error ? error.message : '删除失败，请重试')
+      setUploadStatus('error')
+    } finally {
+      setIsDeleting(null)
+    }
+  }
+
+  const handleEditProduct = (product: Product) => {
+    setProductData(JSON.stringify(product, null, 2))
+    setShowProductList(false)
+  }
+
+  const filteredProducts = existingProducts.filter(product => 
+    product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    product.id.toString().includes(searchTerm)
+  )
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault()
@@ -124,9 +208,11 @@ export default function ProductUploadPage() {
       setUploadStatus('success')
       
       // 重置表单
-      setSelectedBrand('')
       setProductData('')
       setSelectedImages([])
+      
+      // 刷新产品列表
+      await fetchExistingProducts(selectedBrand)
       
     } catch (error) {
       setMessage(error instanceof Error ? error.message : '上传失败，请重试')
@@ -158,7 +244,7 @@ export default function ProductUploadPage() {
               </label>
               <select
                 value={selectedBrand}
-                onChange={(e) => setSelectedBrand(e.target.value)}
+                onChange={(e) => handleBrandChange(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
@@ -170,6 +256,86 @@ export default function ProductUploadPage() {
                 ))}
               </select>
             </div>
+
+            {/* 现有产品管理 */}
+            {selectedBrand && (
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    现有产品管理
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setShowProductList(!showProductList)}
+                    className="flex items-center px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+                  >
+                    <Search className="w-4 h-4 mr-1" />
+                    {showProductList ? '隐藏' : '查看'}产品列表
+                  </button>
+                </div>
+                
+                {showProductList && (
+                  <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                    {/* 搜索框 */}
+                    <div className="mb-3">
+                      <input
+                        type="text"
+                        placeholder="搜索产品名称或ID..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      />
+                    </div>
+                    
+                    {/* 产品列表 */}
+                    <div className="max-h-60 overflow-y-auto">
+                      {filteredProducts.length === 0 ? (
+                        <div className="text-center text-gray-500 py-4">
+                          {existingProducts.length === 0 ? '暂无产品' : '未找到匹配的产品'}
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          {filteredProducts.map((product) => (
+                            <div key={product.id} className="flex items-center justify-between bg-white p-3 rounded border">
+                              <div className="flex-1">
+                                <div className="font-medium text-sm">ID: {product.id}</div>
+                                <div className="text-gray-600 text-sm truncate">{product.name}</div>
+                                <div className="text-xs text-gray-500">{product.price}</div>
+                              </div>
+                              <div className="flex space-x-2">
+                                <button
+                                  type="button"
+                                  onClick={() => handleEditProduct(product)}
+                                  className="px-2 py-1 text-xs bg-blue-100 text-blue-700 rounded hover:bg-blue-200 transition-colors"
+                                >
+                                  编辑
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => handleDeleteProduct(product.id)}
+                                  disabled={isDeleting === product.id}
+                                  className={`px-2 py-1 text-xs rounded transition-colors ${
+                                    isDeleting === product.id
+                                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                      : 'bg-red-100 text-red-700 hover:bg-red-200'
+                                  }`}
+                                >
+                                  {isDeleting === product.id ? (
+                                    '删除中...'
+                                  ) : (
+                                    <Trash2 className="w-3 h-3" />
+                                  )}
+                                </button>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* JSON数据输入 */}
             <div>
