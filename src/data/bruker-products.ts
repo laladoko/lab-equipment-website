@@ -29,6 +29,10 @@ export const brukerProductCategories = [
 
 
 
+
+
+
+
 export const brukerApplicationAreas = [
   '材料科学',
   '药物研发',
@@ -43,6 +47,10 @@ export const brukerApplicationAreas = [
 ];
 
 // 数据查询函数
+
+
+
+
 
 
 
@@ -74,7 +82,7 @@ export const brukerProducts: BrukerProduct[] = [
     image: '/brands/bruker/senterra-ii-raman-microscope.png',
     description: 'SENTERRA II是易操作、免维护的共聚焦拉曼显微镜。使用高度自动化的SENTERRA II，可以便捷地在失效分析、质量控制和科学研究中进行拉曼光谱分析和成像。',
     features: ['全自动化硬件', 'SureCalTM实时校准技术', '快速3D拉曼成像', '一键切换4个内置激光器', '自定义工作流程', '强大的光谱识别功能'],
-    price: '询价喵',
+    price: '询价',
     link: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-microscopes/senterra-ii-raman-microscope.html',
     officialLink: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-microscopes/senterra-ii-raman-microscope.html',
     specifications: {
@@ -112,7 +120,7 @@ export const brukerProducts: BrukerProduct[] = [
     image: '/brands/bruker/ram-ii-ft-raman-module.png',
     description: 'RAM II是INVENO FT-IR系列的FT-拉曼扩展模块，提供最全面的振动光谱解决方案。该模块可与现有的FT-IR系统集成，实现红外和拉曼光谱的联合分析。',
     features: ['FT-IR集成', '振动光谱', '模块化设计', '联合分析', '系统扩展', '全面解决方案'],
-    price: '询价喵',
+    price: '询价',
     link: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-spectrometers/ram-ii-ft-raman-module.html',
     officialLink: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-spectrometers/ram-ii-ft-raman-module.html',
     specifications: {
