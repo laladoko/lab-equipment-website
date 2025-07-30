@@ -1,9 +1,8 @@
-// Bruker产品数据 - 基于官方网站真实产品信息
 export interface BrukerProduct {
   id: number;
   name: string;
   category: string;
-  image: string;
+  image?: string;
   description: string;
   features: string[];
   price: string;
@@ -11,6 +10,38 @@ export interface BrukerProduct {
   specifications: Record<string, string>;
   officialLink: string; // 官方产品链接
 }
+
+export const brukerProductCategories = [
+  '手持式拉曼光谱仪',
+  '傅立叶拉曼光谱仪',
+  'FT-拉曼模块',
+  '拉曼显微镜',
+  '红外光谱仪',
+  '红外显微镜',
+  '材料测试',
+  '轮廓仪',
+  '三维光学轮廓仪',
+  '原子力显微镜'
+];
+
+// 应用领域
+
+
+export const brukerApplicationAreas = [
+  '材料科学',
+  '药物研发',
+  '食品安全',
+  '环境监测',
+  '法医分析',
+  '质量控制',
+  '学术研究',
+  '表面分析',
+  '纳米科学',
+  '机械测试'
+];
+
+// 数据查询函数
+
 
 export const brukerProducts: BrukerProduct[] = [
   {
@@ -77,7 +108,7 @@ export const brukerProducts: BrukerProduct[] = [
     image: '/brands/bruker/ram-ii-ft-raman-module.png',
     description: 'RAM II是INVENO FT-IR系列的FT-拉曼扩展模块，提供最全面的振动光谱解决方案。该模块可与现有的FT-IR系统集成，实现红外和拉曼光谱的联合分析。',
     features: ['FT-IR集成', '振动光谱', '模块化设计', '联合分析', '系统扩展', '全面解决方案'],
-    price: '询价',
+    price: '询价喵',
     link: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-spectrometers/ram-ii-ft-raman-module.html',
     officialLink: 'https://www.bruker.com/zh/products-and-solutions/raman-spectroscopy/raman-spectrometers/ram-ii-ft-raman-module.html',
     specifications: {
@@ -337,44 +368,3 @@ export const brukerProducts: BrukerProduct[] = [
     }
   }
 ];
-
-// 产品分类
-export const brukerProductCategories = [
-  '手持式拉曼光谱仪',
-  '傅立叶拉曼光谱仪',
-  'FT-拉曼模块',
-  '拉曼显微镜',
-  '红外光谱仪',
-  '红外显微镜',
-  '材料测试',
-  '轮廓仪',
-  '三维光学轮廓仪',
-  '原子力显微镜'
-];
-
-// 应用领域
-export const brukerApplicationAreas = [
-  '材料科学',
-  '药物研发',
-  '食品安全',
-  '环境监测',
-  '法医分析',
-  '质量控制',
-  '学术研究',
-  '表面分析',
-  '纳米科学',
-  '机械测试'
-];
-
-// 数据查询函数
-export const getBrukerProductsByCategory = (category: string) => {
-  return brukerProducts.filter(product => product.category === category);
-};
-
-export const getAllBrukerProducts = () => {
-  return brukerProducts;
-};
-
-export const getBrukerProductById = (id: number) => {
-  return brukerProducts.find(product => product.id === id);
-}; 

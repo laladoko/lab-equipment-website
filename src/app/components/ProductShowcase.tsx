@@ -30,7 +30,7 @@ export default function ProductShowcase({ products, accentColor, onProductClick 
           >
             {/* 产品图片 */}
             <ProductImage
-              src={product.image}
+              src={product.image || '/placeholder-product.png'}
               alt={product.name}
               className="object-contain group-hover:scale-105"
               containerClassName="h-64"

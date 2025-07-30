@@ -23,6 +23,10 @@ export const fritschProductCategories = [
 
 
 
+
+
+
+
 export const fritschApplicationAreas = [
   '材料科学研究',
   '地质样品制备',
@@ -36,6 +40,10 @@ export const fritschApplicationAreas = [
 ];
 
 // 数据查询函数
+
+
+
+
 
 
 

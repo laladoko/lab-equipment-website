@@ -3,7 +3,7 @@ export interface OlympusProduct {
   id: number;
   name: string;
   category: string;
-  image: string;
+  image?: string;
   description: string;
   features: string[];
   price: string;

@@ -46,7 +46,7 @@ export default function ProductDetail({ product, onClose }: ProductDetailProps) 
             <div>
               {/* 产品图片 */}
               <ProductImage
-                src={product.image}
+                src={product.image || '/placeholder-product.png'}
                 alt={product.name}
                 className="object-contain rounded-2xl"
                 containerClassName="h-80 rounded-2xl mb-6"

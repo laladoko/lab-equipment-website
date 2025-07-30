@@ -8,7 +8,7 @@ interface GenericProduct {
   id: number;
   name: string;
   category: string;
-  image: string;
+  image?: string;
   description: string;
   features: string[];
   price: string;
@@ -43,7 +43,7 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
           >
             {/* 产品图片 */}
             <ProductImage
-              src={product.image}
+              src={product.image || '/placeholder-product.png'}
               alt={product.name}
               className="object-contain group-hover:scale-105"
               containerClassName="h-64"

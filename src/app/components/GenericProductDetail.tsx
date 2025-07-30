@@ -8,7 +8,7 @@ interface GenericProduct {
   id: number;
   name: string;
   category: string;
-  image: string;
+  image?: string;
   description: string;
   features: string[];
   price: string;
@@ -59,7 +59,7 @@ export default function GenericProductDetail({ product, onClose, brandName }: Ge
             <div>
               {/* 产品图片 */}
               <ProductImage
-                src={product.image}
+                src={product.image || '/placeholder-product.png'}
                 alt={product.name}
                 className="object-contain rounded-2xl"
                 containerClassName="h-80 rounded-2xl mb-6"
