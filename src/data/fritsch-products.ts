@@ -21,6 +21,8 @@ export const fritschProductCategories = [
 // 应用领域
 
 
+
+
 export const fritschApplicationAreas = [
   '材料科学研究',
   '地质样品制备',
@@ -34,6 +36,8 @@ export const fritschApplicationAreas = [
 ];
 
 // 数据查询函数
+
+
 
 
 export const fritschProducts: FritschProduct[] = [
@@ -217,19 +221,5 @@ export const fritschProducts: FritschProduct[] = [
       '主盘转速': '50-400rpm',
       '相对传动比': '1:-2.19'
     }
-  },
-  {
-    id: 9,
-    name: '测试产品',
-    category: '测试设备',
-    description: '功能测试',
-    features: ['测试'],
-    price: '询价',
-    link: 'https://example.com',
-    officialLink: 'https://example.com',
-    specifications: {
-      '状态': '测试'
-    },
-    image: '/brands/fritsch/products/9-1.jpg'
   }
 ];

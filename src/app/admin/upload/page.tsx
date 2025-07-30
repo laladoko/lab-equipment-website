@@ -123,7 +123,9 @@ export default function ProductUploadPage() {
 
   const fetchExistingProducts = async (brand: string) => {
     try {
-      const response = await fetch(`/api/admin/get-products?brand=${brand}`)
+      // 添加时间戳防止缓存
+      const timestamp = Date.now()
+      const response = await fetch(`/api/admin/get-products?brand=${brand}&_t=${timestamp}`)
       if (response.ok) {
         const data = await response.json()
         setExistingProducts(data.products || [])
@@ -167,11 +169,14 @@ export default function ProductUploadPage() {
         throw new Error(errorData.error || '删除失败')
       }
 
-      setMessage(`产品 ID: ${productId} 删除成功`)
+      setMessage(`产品 ID: ${productId} 删除成功，正在刷新列表...`)
       setUploadStatus('success')
       
       // 刷新产品列表
       await fetchExistingProducts(selectedBrand)
+      
+      // 更新消息显示列表已刷新
+      setMessage(`产品 ID: ${productId} 删除成功，列表已更新`)
       
     } catch (error) {
       setMessage(error instanceof Error ? error.message : '删除失败，请重试')
@@ -239,7 +244,7 @@ export default function ProductUploadPage() {
       }
       
       const result = await response.json()
-      setMessage(`产品上传成功! 产品ID: ${result.productId}`)
+      setMessage(`产品上传成功! 产品ID: ${result.productId}，正在刷新列表...`)
       setUploadStatus('success')
       
       // 重置表单
@@ -248,6 +253,9 @@ export default function ProductUploadPage() {
       
       // 刷新产品列表
       await fetchExistingProducts(selectedBrand)
+      
+      // 更新消息显示列表已刷新
+      setMessage(`产品上传成功! 产品ID: ${result.productId}，列表已更新`)
       
     } catch (error) {
       setMessage(error instanceof Error ? error.message : '上传失败，请重试')
