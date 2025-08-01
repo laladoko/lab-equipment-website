@@ -3,10 +3,6 @@ import { writeFile, mkdir } from 'fs/promises'
 import path from 'path'
 import { existsSync } from 'fs'
 import { updateProductData, validateProductData } from '@/utils/productDataUpdater'
-import { exec } from 'child_process'
-import { promisify } from 'util'
-
-const execAsync = promisify(exec)
 
 export async function POST(request: NextRequest) {
   try {
