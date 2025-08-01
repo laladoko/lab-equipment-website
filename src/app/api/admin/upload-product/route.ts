@@ -95,20 +95,23 @@ export async function POST(request: NextRequest) {
     // 更新产品数据
     await updateProductData(brand, productData)
     
-    // 自动重启应用以清除缓存
+    // 自动重新构建和重启应用以清除缓存
     try {
-      console.log('🔄 产品数据更新成功，正在重启应用...')
-      // 异步重启，不等待结果，避免请求超时
+      console.log('🔄 产品数据更新成功，正在重新构建和重启应用...')
+      // 异步重新构建和重启，不等待结果，避免请求超时
       setTimeout(async () => {
         try {
+          console.log('📦 正在重新构建应用...')
+          await execAsync('cd /root/lab-equipment-website && npm run build')
+          console.log('🔄 正在重启应用...')
           await execAsync('pm2 restart lab-equipment-website')
-          console.log('✅ 应用重启成功，新数据已生效')
-        } catch (restartError) {
-          console.error('❌ 应用重启失败:', restartError)
+          console.log('✅ 应用重新构建和重启成功，新数据已生效')
+        } catch (error) {
+          console.error('❌ 重新构建或重启失败:', error)
         }
-      }, 1000) // 1秒后执行重启
+      }, 1000) // 1秒后执行重新构建和重启
     } catch (error) {
-      console.warn('⚠️ 重启命令执行异常:', error)
+      console.warn('⚠️ 重新构建命令执行异常:', error)
     }
     
     return NextResponse.json({
@@ -116,7 +119,7 @@ export async function POST(request: NextRequest) {
       productId: productData.id,
       brand: brand,
       imagesUploaded: uploadedImages.length,
-      message: '产品上传成功，应用将在几秒后自动重启以应用更改',
+      message: '产品上传成功，应用将在1-2分钟内自动重新构建和重启以应用更改',
       autoRestart: true
     })
     
