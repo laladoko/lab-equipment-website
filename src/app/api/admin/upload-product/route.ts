@@ -95,10 +95,12 @@ export async function POST(request: NextRequest) {
     // 更新产品数据
     await updateProductData(brand, productData)
     
-    // 自动重新构建和重启应用以清除缓存
+    // 暂时禁用自动重新构建功能，因为它可能导致应用崩溃
+    // TODO: 需要实现更安全的重新构建机制
     try {
-      console.log('🔄 产品数据更新成功，正在重新构建和重启应用...')
-      // 异步重新构建和重启，不等待结果，避免请求超时
+      console.log('🔄 产品数据更新成功，请手动重新构建和重启以应用更改')
+      // 注释掉自动重新构建，因为在运行时重新构建可能破坏.next目录
+      /*
       setTimeout(async () => {
         try {
           console.log('📦 正在重新构建应用...')
@@ -109,7 +111,8 @@ export async function POST(request: NextRequest) {
         } catch (error) {
           console.error('❌ 重新构建或重启失败:', error)
         }
-      }, 1000) // 1秒后执行重新构建和重启
+      }, 1000)
+      */
     } catch (error) {
       console.warn('⚠️ 重新构建命令执行异常:', error)
     }
@@ -119,8 +122,8 @@ export async function POST(request: NextRequest) {
       productId: productData.id,
       brand: brand,
       imagesUploaded: uploadedImages.length,
-      message: '产品上传成功，应用将在1-2分钟内自动重新构建和重启以应用更改',
-      autoRestart: true
+      message: '产品上传成功，数据已保存。请运行部署脚本以应用更改。',
+      autoRestart: false
     })
     
   } catch (error) {

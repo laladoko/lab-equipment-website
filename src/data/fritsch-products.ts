@@ -27,6 +27,8 @@ export const fritschProductCategories = [
 
 
 
+
+
 export const fritschApplicationAreas = [
   '材料科学研究',
   '地质样品制备',
@@ -40,6 +42,8 @@ export const fritschApplicationAreas = [
 ];
 
 // 数据查询函数
+
+
 
 
 
@@ -83,7 +87,7 @@ export const fritschProducts: FritschProduct[] = [
     image: '/brands/fritsch/pulverisette14-variable-speed-rotor-mill.jpg',
     description: 'FRITSCH PULVERISETTE 14 可变高速旋转粉碎机加强型，采用陶瓷轴承高速马达，集撞击力、剪切力于一身，有着更佳的性能及冷却效果，操作明显安静。快速预处理和精细研磨于一身。',
     features: ['操作柔和安静', '冷却效果极佳', '采用陶瓷轴承的高速马达', '高达22,000rpm转速，粉碎更强劲', '极高的转子线速度(111m/s)', '最大进样尺寸<15mm', '样品处理量高达15L/h及以上', '集撞击力、剪切力于一身', '研磨腔室自锁功能，工作特别安全', '最终细度d50 <40μm', '筛网0.08-6mm，可双向使用', '极佳的冷却效果'],
-    price: '询价',
+    price: '询价demo',
     link: 'https://www.fritsch.de/cn/sample-preparation/milling/rotor-mills/pulverisette-14/',
     officialLink: 'https://www.fritsch.de/cn/sample-preparation/milling/rotor-mills/pulverisette-14/',
     specifications: {
