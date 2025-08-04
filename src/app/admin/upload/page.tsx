@@ -50,6 +50,11 @@ export default function ProductUploadPage() {
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
 
+      if (!ctx) {
+        reject(new Error('无法获取 canvas 2d 上下文'))
+        return
+      }
+
       img.onload = () => {
         try {
           // 计算新尺寸 (最大1200x800)
