@@ -38,14 +38,122 @@ export default function ProductUploadPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [isDeleting, setIsDeleting] = useState<string | number | null>(null)
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const optimizeImage = async (file: File): Promise<File> => {
+    return new Promise((resolve, reject) => {
+      const img = new Image()
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+
+      img.onload = () => {
+        try {
+          // 计算新尺寸 (最大1200x800)
+          const maxWidth = 1200
+          const maxHeight = 800
+          let { width, height } = img
+
+          if (width > maxWidth || height > maxHeight) {
+            const aspectRatio = width / height
+            if (width > height) {
+              width = maxWidth
+              height = Math.round(maxWidth / aspectRatio)
+            } else {
+              height = maxHeight
+              width = Math.round(maxHeight * aspectRatio)
+            }
+
+            if (height > maxHeight) {
+              height = maxHeight
+              width = Math.round(maxHeight * aspectRatio)
+            }
+            if (width > maxWidth) {
+              width = maxWidth
+              height = Math.round(maxWidth / aspectRatio)
+            }
+          }
+
+          // 设置画布尺寸
+          canvas.width = width
+          canvas.height = height
+
+          // 绘制优化后的图片
+          ctx.fillStyle = 'white'
+          ctx.fillRect(0, 0, width, height)
+          ctx.drawImage(img, 0, 0, width, height)
+
+          // 转换为优化后的文件
+          canvas.toBlob(
+            (blob) => {
+              if (!blob) {
+                reject(new Error('图片压缩失败'))
+                return
+              }
+
+              const nameWithoutExt = file.name.replace(/\.[^/.]+$/, '')
+              const optimizedFile = new File(
+                [blob],
+                `${nameWithoutExt}.jpg`,
+                { type: 'image/jpeg', lastModified: Date.now() }
+              )
+
+              const originalSizeMB = (file.size / (1024 * 1024)).toFixed(2)
+              const newSizeMB = (optimizedFile.size / (1024 * 1024)).toFixed(2)
+              console.log(`图片优化: ${img.width}x${img.height} → ${width}x${height}, ${originalSizeMB}MB → ${newSizeMB}MB`)
+
+              resolve(optimizedFile)
+            },
+            'image/jpeg',
+            0.85 // 85% 质量
+          )
+        } catch (error) {
+          reject(error)
+        }
+      }
+
+      img.onerror = () => reject(new Error('图片加载失败'))
+      img.src = URL.createObjectURL(file)
+    })
+  }
+
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (files && files[0]) {
       const file = files[0]
-      setSelectedImage(file)
       
-      // 自动更新JSON数据中的image字段
-      updateImageFieldInJson(file)
+      // 检查文件大小和类型
+      const maxSizeMB = 20 // 20MB 限制
+      const fileSizeMB = file.size / (1024 * 1024)
+      
+      if (fileSizeMB > maxSizeMB) {
+        setMessage(`文件过大 (${fileSizeMB.toFixed(2)}MB)，请选择小于 ${maxSizeMB}MB 的图片`)
+        setUploadStatus('error')
+        return
+      }
+
+      if (!file.type.startsWith('image/')) {
+        setMessage('请选择有效的图片文件')
+        setUploadStatus('error')
+        return
+      }
+
+      try {
+        setMessage('正在优化图片...')
+        setUploadStatus('idle')
+        
+        // 自动优化图片
+        const optimizedFile = await optimizeImage(file)
+        
+        setSelectedImage(optimizedFile)
+        setMessage('')
+        
+        // 自动更新JSON数据中的image字段
+        updateImageFieldInJson(optimizedFile)
+      } catch (error) {
+        console.error('图片优化失败:', error)
+        setMessage('图片优化失败，使用原始文件')
+        setUploadStatus('error')
+        setSelectedImage(file)
+        updateImageFieldInJson(file)
+      }
     }
   }
 
@@ -432,6 +540,7 @@ export default function ProductUploadPage() {
                      </div>
                      <p className="text-xs text-gray-500">支持 JPG、PNG、WebP 格式</p>
                      <p className="text-xs text-blue-500">💡 上传图片将自动更新JSON中的image字段</p>
+                     <p className="text-xs text-green-600">🚀 图片会自动优化：调整到1200x800以内，压缩质量85%</p>
                      <p className="text-xs text-gray-500">💡 不上传图片时保持现有图片路径不变</p>
                   </div>
                   <input
@@ -505,8 +614,9 @@ export default function ProductUploadPage() {
           <div className="text-sm text-blue-700 space-y-2">
             <p>• <strong>品牌选择:</strong> 选择要添加产品的品牌，产品将添加到对应品牌的产品列表中</p>
             <p>• <strong>JSON数据:</strong> 可以上传JSON文件或手动输入产品数据，必须包含id、name、description、price、images等字段</p>
-            <p>• <strong>图片上传:</strong> 支持多张图片上传，图片将保存到 /public/brands/[品牌]/products/ 目录下</p>
-            <p>• <strong>文件命名:</strong> 上传的图片会自动重命名为产品ID对应的格式</p>
+            <p>• <strong>图片上传:</strong> 支持图片上传，图片将保存到 /public/brands/[品牌]/products/ 目录下</p>
+            <p>• <strong>智能优化:</strong> 上传的图片会自动优化：调整尺寸到1200x800以内，压缩质量85%，大幅减小文件大小</p>
+            <p>• <strong>文件命名:</strong> 上传的图片会自动重命名为产品ID对应的格式，统一转换为JPG格式</p>
           </div>
         </div>
       </div>
