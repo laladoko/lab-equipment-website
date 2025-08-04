@@ -40,7 +40,13 @@ export default function ProductUploadPage() {
 
   const optimizeImage = async (file: File): Promise<File> => {
     return new Promise((resolve, reject) => {
-      const img = new Image()
+      // 确保在客户端环境下运行
+      if (typeof window === 'undefined') {
+        reject(new Error('图片优化只能在客户端运行'))
+        return
+      }
+      
+      const img = new window.Image()
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
 
