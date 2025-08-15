@@ -82,7 +82,7 @@ export default function ProductDetail({ product, onClose }: ProductDetailProps) 
                   产品分类
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {product.features.map((feature, index) => (
+                  {product.features?.map((feature, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -10 }}
@@ -105,7 +105,7 @@ export default function ProductDetail({ product, onClose }: ProductDetailProps) 
                 </h3>
                 <div className="bg-gray-50 rounded-xl p-4">
                   <div className="space-y-3">
-                    {Object.entries(product.specifications).map(([key, value], index) => (
+                    {Object.entries(product.specifications || {}).map(([key, value], index) => (
                       <motion.div
                         key={key}
                         initial={{ opacity: 0, y: 10 }}

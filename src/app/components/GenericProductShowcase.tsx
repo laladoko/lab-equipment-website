@@ -74,9 +74,9 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
                       {feature}
                     </span>
                   ))}
-                  {product.features?.length > 3 && (
+                  {product.features && product.features.length > 3 && (
                     <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
-                      +{product.features?.length - 3}
+                      +{product.features.length - 3}
                     </span>
                   )}
                 </div>

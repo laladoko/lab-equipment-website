@@ -53,7 +53,7 @@ export default function ProductShowcase({ products, accentColor, onProductClick 
               <div className="mb-4">
                 <h5 className="font-semibold text-gray-900 mb-2 text-sm">产品分类</h5>
                 <div className="flex flex-wrap gap-1">
-                  {product.features.slice(0, 3).map((feature: string, idx: number) => (
+                  {product.features?.slice(0, 3).map((feature: string, idx: number) => (
                     <span
                       key={idx}
                       className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
@@ -61,7 +61,7 @@ export default function ProductShowcase({ products, accentColor, onProductClick 
                       {feature}
                     </span>
                   ))}
-                  {product.features.length > 3 && (
+                  {product.features && product.features.length > 3 && (
                     <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
                       +{product.features.length - 3}
                     </span>

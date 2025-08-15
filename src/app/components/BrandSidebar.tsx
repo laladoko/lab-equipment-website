@@ -3,18 +3,11 @@
 import { motion } from 'framer-motion';
 import { ExternalLink, CheckCircle, Phone, Mail, MapPin } from 'lucide-react';
 
-interface Brand {
-  name: string;
-  description: string;
-  longDescription: string;
-  features?: string[];           // 设为可选
-  products: string[];
-  applications: string[];
+interface BrandSidebarProps {
+  features: string[];
   color: string;
   accentColor: string;
-  category: string;
-  official: boolean;
-  yearEstablished: number;
+  brandName?: string;
 }
 
 export default function BrandSidebar({ features, color, accentColor, brandName }: BrandSidebarProps) {
