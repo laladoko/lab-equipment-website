@@ -202,6 +202,36 @@ export const olympusProducts: OlympusProduct[] = [
       '观察方式': '立体观察',
       '载物台': '玻璃载物台'
     }
+  },
+  {
+    id: 12,
+    name: 'FV4000 激光扫描共聚焦显微镜',
+    category: '生物显微镜',
+    image: '/brands/olympus/fv4000-laser-scanning-confocal-microscope.jpg',
+    description: '使用新型FLUOVIEW FV4000共焦激光扫描显微镜为您的成像带来突破性变革。先进的成像技术可实现更高精度的图像，从而使研究人员能够从样品中获得更可靠的数据。以突破性的SilVIR探测器作为系统的核心，可以实现更少的噪点、更高的灵敏度和更强的光子分辨能力。使用FV4000共聚焦显微镜，研究人员可以在更短的时间内、更轻松地获取更高质量的定量图像数据',
+    features: [
+      '激光扫描共聚焦成像',
+      'SilVIR探测器技术',
+      '高精度图像采集',
+      '低噪点成像',
+      '高灵敏度检测',
+      '光子分辨能力',
+      '快速数据获取',
+      '定量图像分析'
+    ],
+    price: '询价',
+    link: 'https://www.instrument.com.cn/netshow/SH103060/C595780.htm',
+    officialLink: 'https://www.olympus-lifescience.com/zh/microscopes/fv4000/',
+    specifications: {
+      '成像方式': '激光扫描共聚焦',
+      '探测器': 'SilVIR探测器',
+      '分辨率': '超高分辨率',
+      '扫描速度': '快速扫描',
+      '应用领域': '生物医学研究、细胞成像',
+      '软件': 'FV4000专用软件',
+      '照明': '多激光器系统',
+      '观察模式': '共聚焦、透射光、反射光'
+    }
   }
 ];
 
