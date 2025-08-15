@@ -4,11 +4,11 @@ export interface BrukerProduct {
   category: string;
   image?: string;
   description: string;
-  features: string[];
+  features?: string[];           // 设为可选
   price: string;
-  link: string;
-  specifications: Record<string, string>;
-  officialLink: string; // 官方产品链接
+  link?: string;                // 设为可选
+  specifications?: Record<string, string>;  // 设为可选
+  officialLink?: string;        // 设为可选
 }
 
 export const brukerProductCategories = [
