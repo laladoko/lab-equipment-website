@@ -1,19 +1,20 @@
-# 🚨 502错误修复总结
+# 🚨 502/500错误修复总结
 
 ## 📅 修复时间
-2025年8月15日 09:32
+2025年8月15日 09:38
 
 ## 🔍 问题诊断
 
 ### 错误现象
-- **HTTP状态码**: 502 Bad Gateway
-- **错误类型**: Next.js应用无法启动
-- **具体错误**: `Could not find a production build in the '.next' directory`
+1. **HTTP状态码**: 502 Bad Gateway
+2. **HTTP状态码**: 500 Internal Server Error
+3. **错误类型**: Next.js应用无法正常响应
 
-### 根本原因
+### 根本原因分析
 1. **构建文件缺失**: 服务器上的 `.next` 目录缺少关键文件
 2. **类型错误**: `olympus-products.ts` 中第12个产品缺少必需属性
 3. **Next.js 15兼容性**: 生产模式启动时缺少 `prerender-manifest.json`
+4. **端口绑定问题**: Next.js应用绑定到IPv6（`:::3000`）而不是IPv4（`127.0.0.1:3000`）
 
 ## ✅ 修复措施
 
@@ -30,15 +31,21 @@
 ### 3. 启动模式调整
 - **问题**: 生产模式启动时缺少 `prerender-manifest.json`
 - **解决**: 改用开发模式启动 (`npm run dev`)
-- **结果**: 应用正常运行，502错误已修复
+- **结果**: 应用编译成功
+
+### 4. 端口绑定修复
+- **问题**: Next.js应用绑定到IPv6（`:::3000`），Nginx无法连接
+- **解决**: 指定绑定到IPv4地址（`--hostname 127.0.0.1`）
+- **结果**: Nginx可以正常代理到应用
 
 ## 📊 修复验证结果
 
 ### ✅ 系统状态
 - **应用状态**: Online (PM2管理)
-- **内存使用**: 60.3MB (正常)
-- **网站可访问性**: ✅ 正常
-- **错误状态**: 502错误已修复
+- **内存使用**: 55.4MB (正常)
+- **端口绑定**: 127.0.0.1:3000 (IPv4，正确)
+- **网站访问**: ✅ 正常 (HTTP 200)
+- **错误状态**: 502/500错误已修复
 
 ### ✅ 功能验证
 - **图片上传**: 支持最大20MB文件
@@ -52,8 +59,17 @@
 # 之前 (生产模式 - 有问题)
 pm2 start lab-equipment-website
 
-# 现在 (开发模式 - 正常)
-pm2 start npm --name 'lab-equipment-website' -- run dev
+# 现在 (开发模式 + IPv4绑定 - 正常)
+pm2 start npm --name 'lab-equipment-website' -- run dev -- --hostname 127.0.0.1
+```
+
+### 端口绑定修复
+```bash
+# 问题状态 (IPv6绑定)
+tcp6       0      0 :::3000                 :::*                    LISTEN
+
+# 修复后 (IPv4绑定)
+tcp        0      0 127.0.0.1:3000          0.0.0.0:*               LISTEN
 ```
 
 ### 构建流程
@@ -67,8 +83,8 @@ npm install
 # 3. 重新构建
 npm run build
 
-# 4. 启动应用
-pm2 start npm --name 'lab-equipment-website' -- run dev
+# 4. 启动应用 (指定IPv4绑定)
+pm2 start npm --name 'lab-equipment-website' -- run dev -- --hostname 127.0.0.1
 ```
 
 ## 🚀 后续优化建议
@@ -77,11 +93,12 @@ pm2 start npm --name 'lab-equipment-website' -- run dev
 - [ ] 监控开发模式的内存使用情况
 - [ ] 设置自动重启机制
 - [ ] 配置日志轮转
+- [ ] 添加健康检查端点
 
 ### 长期规划
 - [ ] 升级到更稳定的Next.js版本
 - [ ] 实现生产环境的正确配置
-- [ ] 添加健康检查端点
+- [ ] 配置IPv4/IPv6双栈支持
 
 ## 📋 监控和维护
 
@@ -95,26 +112,31 @@ pm2 start npm --name 'lab-equipment-website' -- run dev
 
 # 查看应用日志
 ./monitor-logs.sh app
+
+# 检查端口绑定
+netstat -tlnp | grep :3000
 ```
 
 ### 故障排查
 ```bash
-# 如果再次出现502错误
+# 如果再次出现502/500错误
 1. 检查PM2进程状态
-2. 查看错误日志
-3. 重启应用
-4. 必要时重新构建
+2. 查看端口绑定 (应该是 127.0.0.1:3000)
+3. 检查Nginx错误日志
+4. 重启应用
+5. 必要时重新构建
 ```
 
 ## 🎯 总结
 
-**502错误已成功修复！** 
+**502/500错误已成功修复！** 
 
 通过以下步骤解决了问题：
 1. ✅ 修复了数据类型错误
 2. ✅ 重新构建了应用
 3. ✅ 调整了启动模式
-4. ✅ 验证了功能正常
+4. ✅ 修复了端口绑定问题（IPv6 → IPv4）
+5. ✅ 验证了功能正常
 
 现在网站可以正常访问，图片上传功能完全正常，用户可以：
 - 🖼️ 上传大图片文件（最大20MB）
@@ -122,3 +144,11 @@ pm2 start npm --name 'lab-equipment-website' -- run dev
 - 📱 获得实时的处理反馈
 
 **立即测试**: 访问 https://www.qple.net/admin/upload 体验修复后的功能！
+
+## 🔍 关键修复点
+
+**端口绑定问题**是导致500错误的根本原因：
+- Next.js应用默认绑定到IPv6（`:::3000`）
+- Nginx配置期望连接到IPv4（`127.0.0.1:3000`）
+- 使用 `--hostname 127.0.0.1` 强制绑定到IPv4地址
+- 确保Nginx可以正常代理到应用
