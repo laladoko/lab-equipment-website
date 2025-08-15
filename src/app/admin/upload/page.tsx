@@ -19,12 +19,39 @@ const brands: Brand[] = [
 interface Product {
   id: number | string
   name: string
+  category?: string
   description: string
   price: string
-  images: string[]
+  image?: string
+  images?: string[]
   features?: string[]
+  link?: string
   specifications?: Record<string, string>
+  officialLink?: string
+  [key: string]: unknown // 允许其他字段
 }
+
+// 产品字段验证规则
+interface FieldValidationRule {
+  name: string
+  required: boolean
+  type: 'string' | 'number' | 'array' | 'object' | 'any'
+  description: string
+}
+
+const productFieldRules: FieldValidationRule[] = [
+  { name: 'id', required: true, type: 'any', description: '产品唯一标识符' },
+  { name: 'name', required: true, type: 'string', description: '产品名称' },
+  { name: 'category', required: false, type: 'string', description: '产品类别' },
+  { name: 'description', required: true, type: 'string', description: '产品描述' },
+  { name: 'price', required: true, type: 'string', description: '产品价格' },
+  { name: 'image', required: false, type: 'string', description: '产品主图路径' },
+  { name: 'images', required: false, type: 'array', description: '产品图片数组' },
+  { name: 'features', required: false, type: 'array', description: '产品特性列表' },
+  { name: 'link', required: false, type: 'string', description: '产品详情链接' },
+  { name: 'specifications', required: false, type: 'object', description: '技术规格' },
+  { name: 'officialLink', required: false, type: 'string', description: '官方产品链接' }
+]
 
 export default function ProductUploadPage() {
   const [selectedBrand, setSelectedBrand] = useState<string>('')
@@ -209,29 +236,104 @@ export default function ProductUploadPage() {
     }
   }
 
-  const validateProductData = () => {
+  const validateProductData = (): Product => {
     try {
       const data = JSON.parse(productData)
-      const required = ['id', 'name', 'description', 'price']
       
-      // 检查基本必填字段
-      for (const field of required) {
-        if (!data[field]) {
-          throw new Error(`缺少必填字段: ${field}`)
+      // 验证JSON结构
+      if (typeof data !== 'object' || data === null) {
+        throw new Error('数据必须是有效的JSON对象')
+      }
+      
+      // 检查必填字段
+      const requiredFields = productFieldRules.filter(rule => rule.required)
+      for (const field of requiredFields) {
+        if (!data.hasOwnProperty(field.name) || data[field.name] === null || data[field.name] === undefined) {
+          throw new Error(`缺少必填字段: ${field.name} (${field.description})`)
         }
       }
       
-      // 检查图片字段 - image字段在有上传文件时是必需的，没有上传文件时可选
-      if (data.image && typeof data.image !== 'string') {
-        throw new Error('image字段必须是字符串')
+      // 验证字段类型
+      for (const rule of productFieldRules) {
+        if (data.hasOwnProperty(rule.name) && data[rule.name] !== null && data[rule.name] !== undefined) {
+          const value = data[rule.name]
+          let isValid = true
+          
+          switch (rule.type) {
+            case 'string':
+              isValid = typeof value === 'string'
+              break
+            case 'number':
+              isValid = typeof value === 'number' || (typeof value === 'string' && !isNaN(Number(value)))
+              break
+            case 'array':
+              isValid = Array.isArray(value)
+              break
+            case 'object':
+              isValid = typeof value === 'object' && !Array.isArray(value) && value !== null
+              break
+            case 'any':
+              isValid = true
+              break
+          }
+          
+          if (!isValid) {
+            throw new Error(`字段 ${rule.name} 类型错误: 期望 ${rule.type}，实际为 ${typeof value}`)
+          }
+        }
       }
       
-      // 移除images字段（如果存在）
-      delete data.images
+      // 特殊验证规则
+      if (data.id !== undefined) {
+        // ID必须是数字或字符串
+        if (typeof data.id !== 'number' && typeof data.id !== 'string') {
+          throw new Error('ID字段必须是数字或字符串')
+        }
+        // 如果是字符串ID，尝试转换为数字
+        if (typeof data.id === 'string' && !isNaN(Number(data.id))) {
+          data.id = Number(data.id)
+        }
+      }
       
-      return data
+      // 验证features数组（如果存在）
+      if (data.features && Array.isArray(data.features)) {
+        for (let i = 0; i < data.features.length; i++) {
+          if (typeof data.features[i] !== 'string') {
+            throw new Error(`features数组第${i + 1}项必须是字符串`)
+          }
+        }
+      }
+      
+      // 验证specifications对象（如果存在）
+      if (data.specifications && typeof data.specifications === 'object') {
+        for (const [key, value] of Object.entries(data.specifications)) {
+          if (typeof key !== 'string' || typeof value !== 'string') {
+            throw new Error('specifications对象的所有键值都必须是字符串')
+          }
+        }
+      }
+      
+      // 清理数据
+      const cleanedData = { ...data }
+      
+      // 移除images字段（如果存在），因为会被image字段替代
+      delete cleanedData.images
+      
+      // 确保所有可选字段都有正确的类型
+      if (cleanedData.features && !Array.isArray(cleanedData.features)) {
+        delete cleanedData.features
+      }
+      
+      if (cleanedData.specifications && typeof cleanedData.specifications !== 'object') {
+        delete cleanedData.specifications
+      }
+      
+      return cleanedData as Product
     } catch (error) {
-      throw new Error(`JSON数据验证失败: ${error instanceof Error ? error.message : '未知错误'}`)
+      if (error instanceof SyntaxError) {
+        throw new Error('JSON格式错误，请检查语法')
+      }
+      throw new Error(`数据验证失败: ${error instanceof Error ? error.message : '未知错误'}`)
     }
   }
 
@@ -377,6 +479,32 @@ export default function ProductUploadPage() {
     }
   }
 
+  // 字段验证提示组件
+  const FieldValidationHelp = () => (
+    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+      <h3 className="text-sm font-semibold text-blue-800 mb-2">📋 字段验证规则</h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs">
+        {productFieldRules.map((rule) => (
+          <div key={rule.name} className="flex items-center space-x-2">
+            <span className={`px-2 py-1 rounded text-xs font-medium ${
+              rule.required 
+                ? 'bg-red-100 text-red-800' 
+                : 'bg-gray-100 text-gray-600'
+            }`}>
+              {rule.required ? '必填' : '可选'}
+            </span>
+            <span className="font-mono text-blue-600">{rule.name}</span>
+            <span className="text-gray-500">({rule.type})</span>
+            <span className="text-gray-600">{rule.description}</span>
+          </div>
+        ))}
+      </div>
+      <div className="mt-3 text-xs text-blue-600">
+        💡 提示：必填字段为 <span className="font-semibold">id</span>、<span className="font-semibold">name</span>、<span className="font-semibold">description</span>、<span className="font-semibold">price</span>
+      </div>
+    </div>
+  )
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
@@ -410,6 +538,56 @@ export default function ProductUploadPage() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            {/* 字段验证帮助 */}
+            <FieldValidationHelp />
+
+            {/* 示例产品数据模板 */}
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+              <h3 className="text-sm font-semibold text-green-800 mb-2">📝 示例产品数据</h3>
+              <div className="text-xs text-green-700 mb-2">
+                复制以下模板，根据实际情况修改字段值：
+              </div>
+              <pre className="bg-white border border-green-200 rounded p-3 text-xs text-green-800 overflow-x-auto">
+{`{
+  "id": 13,
+  "name": "产品名称",
+  "category": "产品类别",
+  "description": "产品详细描述",
+  "price": "询价",
+  "features": ["特性1", "特性2", "特性3"],
+  "link": "产品详情链接",
+  "specifications": {
+    "规格1": "值1",
+    "规格2": "值2"
+  },
+  "officialLink": "官方产品链接"
+}`}
+              </pre>
+              <button
+                type="button"
+                onClick={() => {
+                  const template = `{
+  "id": 13,
+  "name": "产品名称",
+  "category": "产品类别",
+  "description": "产品详细描述",
+  "price": "询价",
+  "features": ["特性1", "特性2", "特性3"],
+  "link": "产品详情链接",
+                  "specifications": {
+                    "规格1": "值1",
+                    "规格2": "值2"
+                  },
+                  "officialLink": "官方产品链接"
+                }`
+                  setProductData(template)
+                }}
+                className="mt-2 px-3 py-1 text-xs bg-green-100 text-green-700 rounded hover:bg-green-200 transition-colors"
+              >
+                使用模板
+              </button>
             </div>
 
             {/* 现有产品管理 */}

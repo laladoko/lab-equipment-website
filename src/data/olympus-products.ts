@@ -235,6 +235,38 @@ export const olympusProducts: OlympusProduct[] = [
   }
 ];
 
+// 📝 产品数据结构说明
+// 
+// 现在以下字段都是可选的，可以根据需要添加：
+// - features?: string[]           // 产品特性列表
+// - link?: string                // 产品详情链接
+// - specifications?: Record<string, string>  // 技术规格
+// - officialLink?: string        // 官方产品链接
+// 
+// 示例：最小产品数据
+// {
+//   id: 13,
+//   name: "产品名称",
+//   category: "产品类别",
+//   description: "产品描述",
+//   price: "价格"
+//   // 其他字段可选
+// }
+// 
+// 示例：完整产品数据
+// {
+//   id: 14,
+//   name: "产品名称",
+//   category: "产品类别",
+//   image: "/path/to/image.jpg",
+//   description: "产品描述",
+//   features: ["特性1", "特性2"],
+//   price: "价格",
+//   link: "详情链接",
+//   specifications: {"规格1": "值1"},
+//   officialLink: "官方链接"
+// }
+
 // 产品分类
 export const productCategories = [
   '数码显微镜',
