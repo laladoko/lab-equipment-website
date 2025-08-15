@@ -10,11 +10,11 @@ interface GenericProduct {
   category: string;
   image?: string;
   description: string;
-  features: string[];
+  features?: string[];           // 设为可选
   price: string;
-  link: string;
-  specifications: Record<string, string>;
-  officialLink: string;
+  link?: string;                // 设为可选
+  specifications?: Record<string, string>;  // 设为可选
+  officialLink?: string;        // 设为可选
 }
 
 interface GenericProductShowcaseProps {
@@ -66,7 +66,7 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
               <div className="mb-4">
                 <h5 className="font-semibold text-gray-900 mb-2 text-sm">产品分类</h5>
                 <div className="flex flex-wrap gap-1">
-                  {product.features.slice(0, 3).map((feature: string, idx: number) => (
+                  {product.features?.slice(0, 3).map((feature: string, idx: number) => (
                     <span
                       key={idx}
                       className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
@@ -74,9 +74,9 @@ export default function GenericProductShowcase({ products, accentColor, onProduc
                       {feature}
                     </span>
                   ))}
-                  {product.features.length > 3 && (
+                  {product.features?.length > 3 && (
                     <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded">
-                      +{product.features.length - 3}
+                      +{product.features?.length - 3}
                     </span>
                   )}
                 </div>

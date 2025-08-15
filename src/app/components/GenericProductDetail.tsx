@@ -10,11 +10,11 @@ interface GenericProduct {
   category: string;
   image?: string;
   description: string;
-  features: string[];
+  features?: string[];           // 设为可选
   price: string;
-  link: string;
-  specifications: Record<string, string>;
-  officialLink: string;
+  link?: string;                // 设为可选
+  specifications?: Record<string, string>;  // 设为可选
+  officialLink?: string;        // 设为可选
 }
 
 interface GenericProductDetailProps {
@@ -95,7 +95,7 @@ export default function GenericProductDetail({ product, onClose, brandName }: Ge
                   产品分类
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {product.features.map((feature, index) => (
+                  {product.features?.map((feature, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, x: -10 }}
@@ -118,7 +118,7 @@ export default function GenericProductDetail({ product, onClose, brandName }: Ge
                 </h3>
                 <div className="bg-gray-50 rounded-xl p-4">
                   <div className="space-y-3">
-                    {Object.entries(product.specifications).map(([key, value], index) => (
+                    {Object.entries(product.specifications || {}).map(([key, value], index) => (
                       <motion.div
                         key={key}
                         initial={{ opacity: 0, y: 10 }}
@@ -174,7 +174,7 @@ export default function GenericProductDetail({ product, onClose, brandName }: Ge
                 } else {
                   return (
                     <a
-                      href={product.link}
+                      href={product.link || '#'}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex-1 inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-blue-800 transition-all duration-300 shadow-lg hover:shadow-xl"
