@@ -9,8 +9,9 @@ export default function Brands() {
   const brands = [
     {
       name: 'EVIDENT / OLYMPUS',
-          description: '全球领先的光学仪器制造商，专业提供显微镜等精密光学设备',
-    features: ['高精度显微镜', '生命科学仪器'],
+      chineseName: '奥伟登',
+      description: '全球领先的光学仪器制造商，专业提供显微镜等精密光学设备',
+      features: ['高精度显微镜', '生命科学仪器'],
       color: 'from-blue-600 to-blue-700',
       accentColor: 'blue',
       logo: '/brands/evident-olympus-logo.png',
@@ -21,6 +22,7 @@ export default function Brands() {
     },
     {
       name: 'BRUKER',
+      chineseName: '布鲁克',
       description: '世界知名的分析仪器制造商，专注于光谱，核磁共振、质谱、X射线分析等高端分析设备',
       features: ['核磁共振仪', '质谱仪', 'X射线衍射仪', '分子光谱仪'],
       color: 'from-blue-500 to-blue-600',
@@ -33,6 +35,7 @@ export default function Brands() {
     },
     {
       name: 'WIGGENS',
+      chineseName: '维根技术',
       description: '德国知名实验室设备制造商，提供高品质的实验室通用设备和耗材',
       features: ['实验室通用设备', '精密天平', '离心机', '实验室耗材'],
       color: 'from-blue-400 to-blue-500',
@@ -45,6 +48,7 @@ export default function Brands() {
     },
     {
       name: 'FRITSCH',
+      chineseName: '飞驰',
       description: '德国专业研磨设备制造商，在样品制备和颗粒分析领域享有盛誉',
       features: ['研磨设备', '筛分设备', '激光粒度仪', '样品制备设备'],
       color: 'from-indigo-500 to-indigo-600',
@@ -104,6 +108,9 @@ export default function Brands() {
                   {/* 品牌信息 */}
                   <div>
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{brand.name}</h3>
+                    {brand.chineseName && (
+                      <p className="text-lg text-blue-600 font-semibold mb-1">{brand.chineseName}</p>
+                    )}
                     <p className="text-gray-600 font-medium">{brand.category}</p>
                   </div>
                 </div>

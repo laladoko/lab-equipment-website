@@ -6,14 +6,15 @@ import { Upload, FileText, Image, Save, AlertCircle, CheckCircle, Trash2, Search
 interface Brand {
   id: string
   name: string
+  chineseName?: string
   slug: string
 }
 
 const brands: Brand[] = [
-  { id: 'bruker', name: 'BRUKER', slug: 'bruker' },
-  { id: 'olympus', name: 'EVIDENT/OLYMPUS', slug: 'olympus' },
-  { id: 'wiggens', name: 'WIGGENS', slug: 'wiggens' },
-  { id: 'fritsch', name: 'FRITSCH', slug: 'fritsch' }
+  { id: 'bruker', name: 'BRUKER', chineseName: '布鲁克', slug: 'bruker' },
+  { id: 'olympus', name: 'EVIDENT/OLYMPUS', chineseName: '奥伟登', slug: 'olympus' },
+  { id: 'wiggens', name: 'WIGGENS', chineseName: '维根技术', slug: 'wiggens' },
+  { id: 'fritsch', name: 'FRITSCH', chineseName: '飞驰', slug: 'fritsch' }
 ]
 
 interface Product {
@@ -534,7 +535,7 @@ export default function ProductUploadPage() {
                 <option value="">请选择品牌...</option>
                 {brands.map((brand) => (
                   <option key={brand.id} value={brand.slug}>
-                    {brand.name}
+                    {brand.name} {brand.chineseName ? `(${brand.chineseName})` : ''}
                   </option>
                 ))}
               </select>

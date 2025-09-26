@@ -8,6 +8,7 @@ import BrandLogo from './BrandLogo';
 interface BrandHeaderProps {
   brand: {
     name: string;
+    chineseName?: string;
     category: string;
     description: string;
     yearEstablished: number;
@@ -41,7 +42,10 @@ export default function BrandHeader({ brand }: BrandHeaderProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
-                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-4">{brand.name}</h1>
+                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-2">{brand.name}</h1>
+                {brand.chineseName && (
+                  <p className="text-3xl text-blue-600 font-bold mb-2">{brand.chineseName}</p>
+                )}
                 <p className="text-2xl text-gray-600 font-medium mb-6">{brand.category}</p>
                 <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mb-6">
                   {brand.description}

@@ -1,6 +1,7 @@
 // 品牌数据类型定义
 export interface BrandData {
   name: string;
+  chineseName: string;
   description: string;
   longDescription: string;
   features: string[];
@@ -17,6 +18,7 @@ export interface BrandData {
 export const brandData: Record<string, BrandData> = {
   'olympus': {
     name: 'EVIDENT / OLYMPUS',
+    chineseName: '奥伟登',
     description: '全球领先的光学仪器制造商，专业提供显微镜等精密光学设备',
     longDescription: 'EVIDENT/OLYMPUS是全球知名的光学仪器制造商，在显微镜等领域享有盛誉。我们作为官方授权代理商，为客户提供最优质的产品和服务。',
     features: ['数码显微镜', '激光扫描显微镜', '测量显微镜', '表面分析仪器', '半导体检测设备'],
@@ -42,6 +44,7 @@ export const brandData: Record<string, BrandData> = {
   },
   'bruker': {
     name: 'BRUKER',
+    chineseName: '布鲁克',
     description: '世界知名的分析仪器制造商，专注于光谱，核磁共振、质谱、X射线分析等高端分析设备',
     longDescription: 'BRUKER是全球领先的分析仪器制造商，在光谱，核磁共振、质谱、X射线分析等领域拥有世界级的技术和产品。我们提供从样品制备到数据分析的完整解决方案。',
     features: ['光谱', '纳米表面仪器', 'X射线', '质谱', '核磁共振', '微生物和诊断'],
@@ -62,6 +65,7 @@ export const brandData: Record<string, BrandData> = {
   },
   'wiggens': {
     name: 'WIGGENS',
+    chineseName: '维根技术',
     description: '德国知名实验室设备制造商，提供高品质的实验室通用设备和耗材',
     longDescription: 'WIGGENS是德国知名的实验室设备制造商，专注于提供高品质的实验室通用设备、精密天平和实验室耗材。我们的产品以德国工艺的严谨和可靠性著称。',
     features: ['实验室通用设备', '精密天平', '离心机', '实验室耗材'],
@@ -82,6 +86,7 @@ export const brandData: Record<string, BrandData> = {
   },
   'fritsch': {
     name: 'FRITSCH',
+    chineseName: '飞驰',
     description: '德国专业研磨设备制造商，在样品制备和颗粒分析领域享有盛誉',
     longDescription: 'FRITSCH是德国专业的研磨设备制造商，在样品制备和颗粒分析领域拥有超过90年的经验。我们的产品广泛应用于材料科学、地质学、化学等领域。',
     features: ['研磨设备', '筛分设备', '激光粒度仪', '样品制备设备'],
