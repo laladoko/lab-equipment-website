@@ -24,6 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
+      <head>
+        <meta name="baidu-site-verification" content="codeva-mq5YH0jw6w" />
+      </head>
       <body className={inter.className}>
         {children}
       </body>
