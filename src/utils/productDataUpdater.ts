@@ -13,10 +13,46 @@ export interface ProductData {
   [key: string]: unknown
 }
 
+// 从文件内容中解析产品数组（避免动态 import 内存泄漏）
+function parseProductsFromFile(fileContent: string): ProductData[] {
+  // 匹配产品数组的内容
+  const productsMatch = fileContent.match(/export const \w+Products[^=]*=\s*(\[[\s\S]*\]);?\s*$/)
+  if (!productsMatch) {
+    return []
+  }
+  
+  try {
+    // 将 TypeScript 对象字面量转换为 JSON 格式
+    let arrayStr = productsMatch[1]
+    
+    // 移除尾部分号
+    arrayStr = arrayStr.replace(/;\s*$/, '')
+    
+    // 将单引号字符串转换为双引号
+    // 处理键名（不带引号的）
+    arrayStr = arrayStr.replace(/(\s+)(\w+):/g, '$1"$2":')
+    // 处理单引号字符串值
+    arrayStr = arrayStr.replace(/'([^'\\]*(?:\\.[^'\\]*)*)'/g, (_, content) => {
+      // 转义内部的双引号，取消转义的单引号
+      const escaped = content.replace(/\\'/g, "'").replace(/"/g, '\\"')
+      return `"${escaped}"`
+    })
+    
+    // 移除尾部逗号
+    arrayStr = arrayStr.replace(/,(\s*[}\]])/g, '$1')
+    
+    const products = JSON.parse(arrayStr)
+    return products
+  } catch (error) {
+    console.error('解析产品数据失败:', error)
+    return []
+  }
+}
+
 export async function updateProductData(brand: string, newProduct: ProductData): Promise<void> {
   const dataFilePath = path.join(process.cwd(), 'src', 'data', `${brand}-products.ts`)
   
-  // 读取现有文件内容（用于保留文件结构）
+  // 读取现有文件内容
   const fileContent = await readFile(dataFilePath, 'utf-8')
   
   // 提取接口定义
@@ -30,23 +66,13 @@ export async function updateProductData(brand: string, newProduct: ProductData):
   const applicationAreasMatch = fileContent.match(/export const \w+ApplicationAreas[\s\S]*?(?=export const \w+Products)/g)
   const applicationAreasDef = applicationAreasMatch ? applicationAreasMatch[0] : ''
   
-  // 使用动态导入获取现有产品数据
+  // 从文件内容解析现有产品数据（避免动态 import）
   let existingProducts: ProductData[]
   try {
-    // 删除require缓存，确保获取最新数据
-    const modulePath = path.join(process.cwd(), 'src', 'data', `${brand}-products.ts`)
-    delete require.cache[modulePath]
-    
-    // 动态导入模块
-    const productModule = await import(`@/data/${brand}-products`)
-    const productKey = `${brand}Products`
-    
-    if (!productModule[productKey]) {
-      throw new Error(`未找到${productKey}导出`)
+    existingProducts = parseProductsFromFile(fileContent)
+    if (existingProducts.length === 0 && fileContent.includes('Products')) {
+      console.warn('警告: 无法解析现有产品数据，将创建新数组')
     }
-    
-    // 深拷贝现有产品数据
-    existingProducts = JSON.parse(JSON.stringify(productModule[productKey]))
   } catch (error) {
     console.error('获取现有产品数据失败:', error)
     throw new Error('获取现有产品数据失败')
