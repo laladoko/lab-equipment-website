@@ -10,8 +10,8 @@ export default function Brands() {
     {
       name: 'EVIDENT / OLYMPUS',
       chineseName: '奥伟登',
-      description: '全球领先的光学仪器制造商，专业提供显微镜等精密光学设备',
-      features: ['高精度显微镜', '生命科学仪器'],
+          description: '全球领先的光学仪器制造商，专业提供显微镜等精密光学设备',
+    features: ['高精度显微镜', '生命科学仪器'],
       color: 'from-blue-600 to-blue-700',
       accentColor: 'blue',
       logo: '/brands/evident-olympus-logo.png',
