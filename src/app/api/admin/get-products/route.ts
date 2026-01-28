@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 // 静态导入所有品牌数据，避免动态 import 内存泄漏
-import { brukerProducts } from '@/data/bruker-products'
-import { olympusProducts } from '@/data/olympus-products'
-import { wiggensProducts } from '@/data/wiggens-products'
-import { fritschProducts } from '@/data/fritsch-products'
+import { brukerProducts } from '../../../../data/bruker-products'
+import { olympusProducts } from '../../../../data/olympus-products'
+import { wiggensProducts } from '../../../../data/wiggens-products'
+import { fritschProducts } from '../../../../data/fritsch-products'
 
 // 品牌数据映射
 const brandProductsMap: Record<string, unknown[]> = {
