@@ -27,12 +27,6 @@ export const brukerProductCategories = [
 // 应用领域
 
 
-
-
-
-
-
-
 export const brukerApplicationAreas = [
   '材料科学',
   '药物研发',

@@ -24,11 +24,6 @@ export const fritschProductCategories = [
 
 
 
-
-
-
-
-
 export const fritschApplicationAreas = [
   '材料科学研究',
   '地质样品制备',
@@ -49,12 +44,9 @@ export const fritschApplicationAreas = [
 
 
 
-
-
-
 export const fritschProducts: FritschProduct[] = [
   {
-    id: 2,
+    id: 1,
     name: 'PULVERISETTE 6 单罐式行星研磨机（经典型）',
     category: '行星式球磨机',
     image: '/brands/fritsch/pulverisette6-single-jar-planetary-mill.png',
@@ -67,27 +59,25 @@ export const fritschProducts: FritschProduct[] = [
       '工作站数量': '1个',
       '特点': '高效率且需极小空间',
       '适用样品': '坚硬、中等硬度、柔软、脆性、坚韧、潮湿',
-      '研磨碗容量': '80-500ml',
+      '研磨碗容量': '80,250,500ml',
       '最大进样尺寸': '10mm',
       '最小进样量': '10ml',
       '最大进样量': '225ml',
-      '研磨球直径': '0.1-30mm',
       '主盘转速': '100-650rpm',
       '传动比': '1:-1.82',
       '最终细度': '< 1μm',
       '惰性气体中研磨': '可以',
-      '气体压力与温度测量': '可以',
-      '噪音等级': '< 75dB'
+      '气体压力与温度测量': '可以'
     }
   },
   {
-    id: 3,
+    id: 2,
     name: 'PULVERISETTE 14 可变高速旋转粉碎机（加强版）',
     category: '旋转粉碎机',
     image: '/brands/fritsch/pulverisette14-variable-speed-rotor-mill.jpg',
     description: 'FRITSCH PULVERISETTE 14 可变高速旋转粉碎机加强型，采用陶瓷轴承高速马达，集撞击力、剪切力于一身，有着更佳的性能及冷却效果，操作明显安静。快速预处理和精细研磨于一身。',
-    features: ['操作柔和安静', '冷却效果极佳', '采用陶瓷轴承的高速马达', '高达22,000rpm转速，粉碎更强劲', '极高的转子线速度(111m/s)', '最大进样尺寸<15mm', '样品处理量高达15L/h及以上', '集撞击力、剪切力于一身', '研磨腔室自锁功能，工作特别安全', '最终细度d50 <40μm', '筛网0.08-6mm，可双向使用', '极佳的冷却效果'],
-    price: '询价demo',
+    features: ['操作柔和安静', '冷却效果极佳', '采用陶瓷轴承的高速马达'],
+    price: '询价',
     link: 'https://www.fritsch.de/cn/sample-preparation/milling/rotor-mills/pulverisette-14/',
     officialLink: 'https://www.fritsch.de/cn/sample-preparation/milling/rotor-mills/pulverisette-14/',
     specifications: {
@@ -98,37 +88,30 @@ export const fritschProducts: FritschProduct[] = [
       '最终细度': 'd50 <40μm',
       '筛网规格': '0.08-6mm，可双向使用',
       '驱动功率': '2200W',
-      '马达类型': '陶瓷轴承高速马达',
-      '冷却系统': '强制风冷，极佳冷却效果',
-      '安全功能': '研磨腔室自锁功能',
-      '操作标准': '符合DIN EN标准',
       '适用材料': '软性、中硬度、脆性、纤维材料'
     }
   },
   {
-    id: 4,
+    id: 3,
     name: 'PULVERISETTE 11 刀式研磨仪',
     category: '刀式研磨机',
     image: '/brands/fritsch/pulverisette11-cutting-mill.jpg',
     description: 'FRITSCH PULVERISETTE 11 刀式研磨仪，极快的粉碎、匀质和混合；强劲的电机，功率高达1250W；多达4个刀刃的转刀刀片，每分钟对样品进行多达56,000次有效切割。',
-    features: ['极快的粉碎、匀质和混合', '强劲的电机，功率高达1250W', '多达4个刀刃的转刀刀片', '每分钟56,000次有效切割', '研磨容器可用容量高达1400毫升', '可变容量的可调节压力顶盖系统', '可预存20个SOP', 'USB接口管理', '连续、反向和间隔模式'],
+    features: ['极快的粉碎、均质化和混合', '有用容量高达1,400毫升', '20个SOP可以保存', '变速设置带有涡轮功能', '快速冷冻粉碎', '简单清洁'],
     price: '询价',
     link: 'https://www.fritsch.de/cn/sample-preparation/milling/cutting-mills/pulverisette-11/',
     officialLink: 'https://www.fritsch.de/cn/sample-preparation/milling/cutting-mills/pulverisette-11/',
     specifications: {
-      '研磨容器容量': '50-1400ml',
-      '转刀转速': '300-10000rpm',
-      '刀片数量': '4个刀刃',
-      '切割频率': '最高56000次/分钟',
-      '最大样品量': '700ml',
-      '驱动功率': '1250W',
-      '预设程序': '20个SOP',
-      '控制方式': '触摸屏+USB'
+      '适用样品': '潮湿、油性、脂肪、干燥、柔软、中等硬度和纤维状',
+      '最大进料尺寸（取决于材料）': '40 毫米',
+      '供料量（取决于材料）': '< 1,400 毫升；540 毫升，带有Vario-Lid系统',
+      '最终精度（取决于材料）': '< 300 微米',
+      '平均研磨时间': '30 秒'
     }
   },
   {
-    id: 5,
-    name: '高能双罐行星式球磨机（加强型）',
+    id: 4,
+    name: '双罐行星式球磨机PULVERISETTE 5（加强型）',
     category: '双罐行星式球磨机',
     image: '/brands/fritsch/pulverisette5-enhanced-planetary-ball-mill.jpg',
     description: '带有2个工作站的FRITSCH新款行星式球磨机，PULVERISETTE 5加强型作为PULVERISETTE 7加强型的姊妹条市开发出来，它的处理更大，是快速湿法/干法研磨、机械合金化、大量样品的混合和均质化的理想研磨机，其研磨结果可达纳米级绝对安全的研磨碗自动锁紧功能。',
@@ -137,7 +120,7 @@ export const fritschProducts: FritschProduct[] = [
     link: 'https://www.fritsch.de/cn/sample-preparation/milling/planetary-mills/pulverisette-5/',
     officialLink: 'https://www.fritsch.de/cn/sample-preparation/milling/planetary-mills/pulverisette-5/',
     specifications: {
-      '最适用样品类型': '硬质、中等硬度、柔性、桑软、坚韧、湿性',
+      '最适用样品类型': '硬质、中等硬度、脆性、柔软、坚韧、湿性',
       '研磨碗数量': '2',
       '研磨碗容积': '125, 150, 250, 420, 500ml',
       '研磨球直径': '0.1-40mm',
@@ -148,13 +131,13 @@ export const fritschProducts: FritschProduct[] = [
       '充入惰性气体研磨': '可以',
       '气体压力与温度测量': '可以',
       '主盘转速': '100-800rpm',
-      '行星盘/研磨碗的传动比': 'i_relative = 1:-2',
+      '行星盘/研磨碗的传动比': 'i_relative = "1":-2',
       '主盘有效直径': '190mm',
       '离心加速度（g=9.81米/平方秒）': '64g'
     }
   },
   {
-    id: 6,
+    id: 5,
     name: 'PULVERISETTE 7 微型行星式研磨机（经典型）',
     category: '微型球磨机',
     image: '/brands/fritsch/pulverisette7-micro-planetary-mill.png',
@@ -164,29 +147,26 @@ export const fritschProducts: FritschProduct[] = [
     link: 'https://www.fritsch.de/cn/sample-preparation/milling/planetary-mills/pulverisette-7/',
     officialLink: 'https://www.fritsch.de/cn/sample-preparation/milling/planetary-mills/pulverisette-7/',
     specifications: {
-      '适用样品': '坚硬、中等硬度、脆性',
+      '适用样品': '坚硬、中等硬度、脆性、潮湿',
       '工作站数量': '2个',
       '研磨碗规格': '12, 45ml',
-      '研磨球尺寸': '0.1-20mm',
       '最大进样尺寸': '5mm',
-      '最小进样量': '1ml',
-      '最大进样量': '60ml',
-      '最终细度': '< 0.1μm',
-      '惰性气体中研磨': '可以',
-      '气体压力与温度测量': '可以',
-      '主盘转速': '150-1100rpm',
-      '传动比': '1:-2',
-      '主盘有效尺寸': '140mm',
-      '离心加速度': '95g'
+      '最小进样量': '0.5ml',
+      '最大进样量': '40ml',
+      '最终细度': '< 1μm',
+      '惰性气体中研磨': '只在手套箱中可以',
+      '气体压力与温度测量': '不可以',
+      '主盘转速': '100-800rpm',
+      '传动比': '1:-2'
     }
   },
   {
-    id: 7,
+    id: 6,
     name: '微型行星式高能球磨机（加强型）',
     category: '微型行星式球磨机',
     image: '/brands/fritsch/pulverisette7-micro-planetary-ball-mill.jpg',
     description: '几十年以来，FRITSCH实验室样品制备仪器以其舒适性、可靠性和精确度赢得了客户的认可。我们在研磨、筛分或分样领域为您提供优质产品和服务。',
-    features: ['超高转速1100rpm以及95倍重力加速度得益于嵌入式研磨器', '可在更短的时间内获得更好的研磨效果', '超短研磨时间达到纳米级研磨细度', '符合人体工学的触摸屏', '合理的菜单结构以及10种语言选择保证了简单直观的用户导航', 'IT结构的完美安全，配备了USB连接方式', '除了简单直观的日志记录'],
+    features: ['超高转速1100rpm以及95倍重力加速度得益于嵌入式研磨器', '可在更短的时间内获得更好的研磨效果', '超短研磨时间达到纳米级研磨细度', '符合人体工学的触摸屏', '合理的菜单结构以及10种语言选择保证了简单直观的用户导航', 'IT结构的完美安全，配备了USB连接方式,保证了简单精确的日记记录'],
     price: '询价',
     link: 'https://www.fritsch.de/cn/sample-preparation/milling/planetary-mills/pulverisette-7/',
     officialLink: 'https://www.fritsch.de/cn/sample-preparation/milling/planetary-mills/pulverisette-7/',
@@ -202,13 +182,13 @@ export const fritschProducts: FritschProduct[] = [
       '惰性气体中研磨': '可以',
       '气体压力与温度测量': '可以',
       '主盘转速': '150-1100rpm',
-      '行星盘/研磨碗的传动比': 'i_relative = 1:-2',
+      '行星盘/研磨碗的传动比': 'i_relative = "1":-2',
       '主盘有效尺寸': '140mm',
       '离心加速度（g=9.81米/平方秒）': '95g'
     }
   },
   {
-    id: 8,
+    id: 7,
     name: 'PULVERISETTE 5 行星式研磨机（经典型）',
     category: '行星式球磨机',
     image: '/brands/fritsch/pulverisette5-classic-planetary-mill.png',

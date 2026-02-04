@@ -16,7 +16,8 @@ export interface ProductData {
 // 从文件内容中解析产品数组（避免动态 import 内存泄漏）
 function parseProductsFromFile(fileContent: string): ProductData[] {
   // 匹配产品数组的内容
-  const productsMatch = fileContent.match(/export const \w+Products[^=]*=\s*(\[[\s\S]*\]);?\s*$/)
+  // 旧实现要求 products 数组在文件末尾，若文件后面还有其他 export（例如查询函数），会导致解析失败并误把历史产品当成空数组
+  const productsMatch = fileContent.match(/export const \w+Products[^=]*=\s*(\[[\s\S]*?\n\]);?/m)
   if (!productsMatch) {
     return []
   }
@@ -54,6 +55,18 @@ export async function updateProductData(brand: string, newProduct: ProductData):
   
   // 读取现有文件内容
   const fileContent = await readFile(dataFilePath, 'utf-8')
+
+  // 尽量保留 products 数组后面的额外导出（如 getXxxByCategory）
+  let trailingExports = ''
+  try {
+    const productsBlockRegex = new RegExp(`export const ${brand}Products[\\s\\S]*?\\n\\];?`, 'm')
+    const match = fileContent.match(productsBlockRegex)
+    if (match && typeof match.index === 'number') {
+      trailingExports = fileContent.slice(match.index + match[0].length)
+    }
+  } catch {
+    trailingExports = ''
+  }
   
   // 提取接口定义
   const interfaceMatch = fileContent.match(/export interface \w+Product \{[\s\S]*?\}/g)
@@ -98,7 +111,7 @@ ${categoriesDef}
 
 ${applicationAreasDef}
 
-export const ${brand}Products: ${brandCapitalized}Product[] = ${productsArrayStr};`
+export const ${brand}Products: ${brandCapitalized}Product[] = ${productsArrayStr};${trailingExports ? `\n${trailingExports.replace(/^\s*\n/, '')}` : ''}`
   
   // 写入更新的文件
   await writeFile(dataFilePath, newFileContent, 'utf-8')

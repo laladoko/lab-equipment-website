@@ -1,4 +1,3 @@
-// Wiggens产品数据 - 基于官方网站真实产品信息
 export interface WiggensProduct {
   id: number;
   name: string;
@@ -11,6 +10,47 @@ export interface WiggensProduct {
   specifications?: Record<string, string>;  // 设为可选
   officialLink?: string;        // 设为可选
 }
+
+export const wiggensProductCategories = [
+  '加热磁力搅拌器',
+  '红外加热磁力搅拌器',
+  'CO2培养箱',
+  '振荡器',
+  '磁驱搅拌器',
+  '顶置式搅拌器',
+  '真空泵'
+];
+
+// 应用领域
+
+
+
+
+
+
+
+
+
+export const wiggensApplicationAreas = [
+  '细胞培养',
+  '微生物学',
+  '样品制备',
+  '化学合成',
+  '生物技术',
+  '质量控制',
+  '教学实验',
+  '科研工作'
+];
+
+// 数据查询函数
+
+
+
+
+
+
+
+
 
 export const wiggensProducts: WiggensProduct[] = [
   {
@@ -27,9 +67,9 @@ export const wiggensProducts: WiggensProduct[] = [
       '加热温度': '≤300°C',
       '样品设置温度': '≤300°C',
       '控温精度': '±1°C',
-      '搅拌速度': '60-1500rpm',
+      '搅拌速度': '150-1500rpm',
       '搅拌位数': '4位',
-      '显示方式': '数字显示'
+      '显示模式': 'LED'
     }
   },
   {
@@ -46,9 +86,9 @@ export const wiggensProducts: WiggensProduct[] = [
       '加热温度': '≤300°C',
       '样品设置温度': '≤300°C',
       '控温精度': '±1°C',
-      '搅拌速度': '60-1500rpm',
+      '搅拌速度': '150-1500rpm',
       '搅拌位数': '6位',
-      '显示方式': '数字显示'
+      '显示模式': 'LED'
     }
   },
   {
@@ -65,7 +105,7 @@ export const wiggensProducts: WiggensProduct[] = [
       '加热温度': '≤450°C',
       '样品温度(配Pt100)': '≤300°C',
       '控温稳定性': '±1°C',
-      '搅拌速度': '60-1500rpm',
+      '搅拌速度': '100-1500rpm',
       '加热方式': '红外加热',
       '显示': 'LCD数字显示'
     }
@@ -84,7 +124,7 @@ export const wiggensProducts: WiggensProduct[] = [
       '加热温度': '≤450°C',
       '样品温度(配Pt100)': '≤300°C',
       '控温稳定性': '±1°C',
-      '搅拌速度': '60-1500rpm',
+      '搅拌速度': '100-1500rpm',
       '加热方式': '红外加热',
       '显示': 'LCD数字显示'
     }
@@ -94,8 +134,8 @@ export const wiggensProducts: WiggensProduct[] = [
     name: 'WH390 Mega系列大功率红外加热磁力搅拌器',
     category: '红外加热磁力搅拌器',
     image: '/brands/wiggens/wh390-mega-high-power-infrared-heating-stirrer.jpg',
-    description: 'WIGGENS WH390 Mega系列大功率红外加热磁力搅拌器，专为大容量样品设计，提供强劲的搅拌力和高效的加热性能。',
-    features: ['大功率设计', '大容量适用', '高效加热', '强劲搅拌', 'Mega系列', '工业级性能'],
+    description: 'WH390 加热磁力搅拌器，满足从轻柔到剧烈的搅拌实验，也可用于样品的加热。',
+    features: ['防腐蚀搪玻璃盘面', '高效率红外线传热', '盘面抗热冲击温度超过 700℃', '坚固外壳，密封壳体，抗腐蚀', '升温速度快，同时能够稳定在设定温度值', '可外接 Pt100 温度传感器控温', '高温提示灯，提示注意安诠，防止烫伤'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-111-1.html',
     officialLink: 'http://cn.wiggens.com/list-111-1.html',
@@ -103,9 +143,9 @@ export const wiggensProducts: WiggensProduct[] = [
       '加热温度': '≤550°C',
       '样品加热温度(配Pt100)': '≤300°C',
       '控温稳定性': '±1°C',
-      '搅拌速度': '60-1500rpm',
-      '最大搅拌量': '20L',
-      '加热功率': '2000W'
+      '搅拌速度': '100-1500rpm',
+      '搅拌量H₂O': '30L',
+      '加热功率': '1800W'
     }
   },
   {
@@ -179,9 +219,8 @@ export const wiggensProducts: WiggensProduct[] = [
       '单位搅拌量': '1~1000ml',
       '搅拌位数': '1',
       '搅拌功率': '20W',
-      '转速范围': '100~1500rpm',
-      '防护等级': 'IP65',
-      '驱动方式': '电磁感应'
+      '防护等级': 'IP68',
+      '电压': '48VDC'
     }
   },
   {
@@ -261,30 +300,6 @@ export const wiggensProducts: WiggensProduct[] = [
     }
   }
 ];
-
-// 产品分类
-export const wiggensProductCategories = [
-  '加热磁力搅拌器',
-  '红外加热磁力搅拌器',
-  'CO2培养箱',
-  '振荡器',
-  '磁驱搅拌器',
-  '顶置式搅拌器',
-  '真空泵'
-];
-
-// 应用领域
-export const wiggensApplicationAreas = [
-  '细胞培养',
-  '微生物学',
-  '样品制备',
-  '化学合成',
-  '生物技术',
-  '质量控制',
-  '教学实验',
-  '科研工作'
-];
-
 // 数据查询函数
 export const getWiggensProductsByCategory = (category: string) => {
   return wiggensProducts.filter(product => product.category === category);
