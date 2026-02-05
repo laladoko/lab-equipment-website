@@ -205,32 +205,5 @@ export const olympusProducts: OlympusProduct[] = [
       '观察方式': '立体观察',
       '载物台': '玻璃载物台'
     }
-  },
-  {
-    id: 12,
-    name: 'FV4000 激光扫描共聚焦显微镜',
-    category: '生物显微镜',
-    image: '/brands/olympus/products/12-1.jpg',
-    description: '使用新型FLUOVIEW FV4000共焦激光扫描显微镜为您的成像带来突破性变革。先进的成像技术可实现更高精度的图像，从而使研究人员能够从样品中获得更可靠的数据。以突破性的SilVIR探测器作为系统的核心，可以实现更少的噪点、更高的灵敏度和更强的光子分辨能力。使用FV4000共聚焦显微镜，研究人员可以在更短的时间内、更轻松地获取更高质量的定量图像数据',
-    price: '询价'
-  },
-  {
-    id: 13,
-    name: 'SZX10 体视显微镜',
-    category: '体视显微镜',
-    description: 'SZX10是一款紧凑型体视显微镜，提供清晰的立体成像和舒适的观察体验',
-    features: ['紧凑设计', '立体成像', '舒适观察', '倾斜目镜', '稳定底座', '教学适用'],
-    price: '询价',
-    link: 'https://www.instrument.com.cn/netshow/SH103060/C210691.htm',
-    officialLink: 'https://www.olympus-lifescience.com/zh/microscopes/szx10/',
-    specifications: {
-      '放大倍数': '3.15x-378x',
-      '工作距离': '115mm',
-      '变倍比': '10:1',
-      '照明': 'LED照明',
-      '观察方式': '立体观察',
-      '载物台': '玻璃载物台'
-    },
-    image: '/brands/olympus/products/13-1.jpg'
   }
 ];

@@ -1,0 +1,15 @@
+# 仅运行 Next.js 应用，适合 2G 内存服务器
+# 使用: docker compose -f docker-compose.simple.yml up -d
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lab-equipment-website
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
