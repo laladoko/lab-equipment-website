@@ -67,7 +67,7 @@ export const wiggensProducts: WiggensProduct[] = [
       '加热温度': '≤300°C',
       '样品设置温度': '≤300°C',
       '控温精度': '±1°C',
-      '搅拌速度': '150-1500rpm',
+      '搅拌速度': '100~1500rpm',
       '搅拌位数': '4位',
       '显示模式': 'LED'
     }
@@ -86,7 +86,7 @@ export const wiggensProducts: WiggensProduct[] = [
       '加热温度': '≤300°C',
       '样品设置温度': '≤300°C',
       '控温精度': '±1°C',
-      '搅拌速度': '150-1500rpm',
+      '搅拌速度': '100~1500rpm',
       '搅拌位数': '6位',
       '显示模式': 'LED'
     }
@@ -131,21 +131,19 @@ export const wiggensProducts: WiggensProduct[] = [
   },
   {
     id: 5,
-    name: 'WH390 Mega系列大功率红外加热磁力搅拌器',
+    name: 'WH380 加热磁力搅拌器',
     category: '红外加热磁力搅拌器',
     image: '/brands/wiggens/wh390-mega-high-power-infrared-heating-stirrer.jpg',
-    description: 'WH390 加热磁力搅拌器，满足从轻柔到剧烈的搅拌实验，也可用于样品的加热。',
-    features: ['防腐蚀搪玻璃盘面', '高效率红外线传热', '盘面抗热冲击温度超过 700℃', '坚固外壳，密封壳体，抗腐蚀', '升温速度快，同时能够稳定在设定温度值', '可外接 Pt100 温度传感器控温', '高温提示灯，提示注意安诠，防止烫伤'],
+    description: 'WH380加热磁力搅拌器，满足从轻柔到剧烈的搅拌实验，也可用于样品的加热。',
+    features: ['防腐蚀搪玻璃盘面', '高效率红外线传热', '盘面抗热冲击温度超过700℃', '坚固外壳，密封壳体，抗腐蚀', '升温速度快，同时能够稳定在设定温度值', '可外接Pt100温度传感器控温', '高温提示灯，提示注意安全，防止烫伤'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-111-1.html',
     officialLink: 'http://cn.wiggens.com/list-111-1.html',
     specifications: {
-      '加热温度': '≤550°C',
-      '样品加热温度(配Pt100)': '≤300°C',
-      '控温稳定性': '±1°C',
-      '搅拌速度': '100-1500rpm',
+      '搅拌速度': '100~1500rpm',
       '搅拌量H₂O': '30L',
-      '加热功率': '1800W'
+      '加热功率': '1800W',
+      '电压': '48VDC'
     }
   },
   {
@@ -154,7 +152,7 @@ export const wiggensProducts: WiggensProduct[] = [
     category: 'CO2培养箱',
     image: '/brands/wiggens/wci-120-co2-incubator.png',
     description: 'WIGGENS WCI-120 CO2培养箱，120L容量，提供稳定的CO2浓度和温度控制，适用于细胞培养和微生物学研究。',
-    features: ['120L大容量', 'CO2浓度控制', '温度稳定', '无菌环境', '细胞培养', '微生物研究'],
+    features: ['6个侧面的直接加热系统', '空气夹套', '双光束的CO2传感器', '水盘加湿', '报警系统', '良好空气和湿度对流', '易于清洗', '温度上限设置', '带孔的搁板', '无冷凝', '微电脑PID控制', 'HEPA气源过滤'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-260-1.html',
     officialLink: 'http://cn.wiggens.com/list-260-1.html',
@@ -162,9 +160,10 @@ export const wiggensProducts: WiggensProduct[] = [
       '箱体体积': '120L',
       '温度范围': 'RT+5~60°C',
       'CO2范围': '0%~20%',
-      '温度均匀性': '±0.2°C',
+      '温场均匀性': '±0.3°C (37℃/室温20℃)',
       '温度精度': '±0.1°C',
-      '内室尺寸': '500×400×600mm'
+      'CO2精度': '±0.1%（5%/37℃）',
+      '内室尺寸': '480×470×520mm'
     }
   },
   {
@@ -173,7 +172,7 @@ export const wiggensProducts: WiggensProduct[] = [
     category: 'CO2培养箱',
     image: '/brands/wiggens/wci-180-co2-incubator.jpg',
     description: 'WIGGENS WCI-180 CO2培养箱，180L大容量设计，提供优异的温度均匀性和CO2浓度稳定性，满足高要求的细胞培养需求。',
-    features: ['180L超大容量', '优异均匀性', 'CO2稳定控制', '高精度传感器', '专业细胞培养', '研究级应用'],
+    features: ['6个侧面的直接加热系统', '空气夹套', '双光束的CO2传感器', '水盘加湿', '报警系统', '良好空气和湿度对流', '易于清洗', '温度上限设置', '带孔的搁板', '无冷凝', '微电脑PID控制', 'HEPA气源过滤'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-260-1.html',
     officialLink: 'http://cn.wiggens.com/list-260-1.html',
@@ -181,9 +180,10 @@ export const wiggensProducts: WiggensProduct[] = [
       '箱体体积': '180L',
       '温度范围': 'RT+5~60°C',
       'CO2范围': '0%~20%',
-      '温度均匀性': '±0.2°C',
+      '温场均匀性': '±0.3°C (37℃/室温20℃)',
       '温度精度': '±0.1°C',
-      '内室尺寸': '600×500×600mm'
+      'CO2精度': '±0.1%（5%/37℃）',
+      '内室尺寸': '473×528×710mm'
     }
   },
   {
@@ -200,9 +200,11 @@ export const wiggensProducts: WiggensProduct[] = [
       '转速': '30~300rpm',
       '振幅': '25/50mm',
       '载重': '5kg',
-      '平台尺寸': '350×350mm',
       '控制精度': '±1rpm',
-      '适用环境': 'CO2培养箱内'
+      '适用环境': 'CO2培养箱内',
+      '控制方式': '微电脑控制，LED数显，远程控制器',
+      '驱动方式': '电磁感应磁力驱动',
+      '振荡模式': '圆周振荡（往复振荡可选）'
     }
   },
   {
@@ -219,7 +221,6 @@ export const wiggensProducts: WiggensProduct[] = [
       '单位搅拌量': '1~1000ml',
       '搅拌位数': '1',
       '搅拌功率': '20W',
-      '防护等级': 'IP68',
       '电压': '48VDC'
     }
   },
@@ -228,37 +229,35 @@ export const wiggensProducts: WiggensProduct[] = [
     name: 'WB2000-C 顶置式搅拌器',
     category: '顶置式搅拌器',
     image: '/brands/wiggens/wb2000c-overhead-stirrer.jpg',
-    description: 'WIGGENS WB2000-C顶置式搅拌器，提供强劲的搅拌力矩，适用于高粘度样品的搅拌，数字显示转速控制精确。',
-    features: ['强劲扭矩', '高粘度适用', '数字显示', '精确控制', '稳定可靠', '实验室专用'],
+    description: '满足高性能设计要求，运行安全、可靠；适合实验室常规搅拌应用，操作简单直观，提高实验室的工作效率；采用免维护无碳刷直流马达，适合实验室长时间高负荷工作；外壳采用防腐蚀表面处理，适合在实验室等环境长期使用。',
+    features: ['免维护无碳刷直流马达', '恒速运转', '密封低静音', '自动过载保护'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-26-1.html',
     officialLink: 'http://cn.wiggens.com/list-26-1.html',
     specifications: {
-      '转速范围': '20~2000rpm',
-      '控制精度': '±1rpm',
-      '最大扭矩': '5Ncm',
-      '数字显示': 'LED显示',
-      '搅拌容量': '0.1~5L',
-      '功率': '40W'
+      '搅拌粘度(cps)': '≤20000',
+      '扭力(Ncm)': '≤70',
+      '搅拌量(L/H2O)': '≤50',
+      '夹持直径(mm)': '≤10',
+      '正反转功能': '有'
     }
   },
   {
     id: 11,
-    name: 'WB2000-M 紫顶置搅拌器',
+    name: 'WB2000-M 紧凑型顶置搅拌器',
     category: '顶置式搅拌器',
     image: '/brands/wiggens/wb2000m-purple-overhead-stirrer.jpg',
-    description: 'WIGGENS WB2000-M紫顶置搅拌器，紫色外观设计，提供稳定的搅拌性能和精确的转速控制，适用于各种实验应用。',
-    features: ['紫色设计', '稳定性能', '精确转速', '多功能应用', '人性化操作', '高品质制造'],
+    description: '满足高性能设计要求，运行安全、可靠；适合实验室常规搅拌应用，操作简单直观，提高实验室的工作效率；采用免维护无碳刷直流马达，适合实验室长时间高负荷工作；外壳采用防腐蚀表面处理，适合在实验室等环境长期使用。',
+    features: ['免维护无碳刷直流马达', '恒速运转', '密封低静音', '自动过载保护'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-26-1.html',
     officialLink: 'http://cn.wiggens.com/list-26-1.html',
     specifications: {
-      '转速范围': '40~2000rpm',
-      '控制精度': '±1rpm',
-      '最大扭矩': '8Ncm',
-      '数字显示': 'LED显示',
-      '搅拌容量': '0.1~10L',
-      '功率': '60W'
+      '搅拌粘度(cps)': '≤20000',
+      '扭力(Ncm)': '≤70',
+      '搅拌量(L/H2O)': '≤50',
+      '夹持直径(mm)': '≤10',
+      '正反转功能': '无'
     }
   },
   {
@@ -266,18 +265,22 @@ export const wiggensProducts: WiggensProduct[] = [
     name: 'ChemVak A410 防腐蚀隔膜真空泵',
     category: '真空泵',
     image: '/brands/wiggens/chemvak-a410-corrosion-resistant-vacuum-pump.jpg',
-    description: 'ChemVak A410防腐蚀隔膜真空泵，采用防腐蚀材料制造，适用于腐蚀性气体的抽取，提供稳定的真空度。',
+    description: 'C系列隔膜泵提供紧凑、高性能和易操作的真空解决方案，适用单向过滤。隔膜确保无油隔膜泵长期使用。节省空间的技术，确保操作便利。PTFE涂层膜片和阀门提供化学抗腐蚀性。选配的手动真空调节器可调节真空泵的流量和极限真空度。',
     features: ['防腐蚀设计', '隔膜技术', '腐蚀性气体适用', '稳定真空', '低维护', '安全可靠'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-16-1.html',
     officialLink: 'http://cn.wiggens.com/list-16-1.html',
     specifications: {
-      '真空度': '13mbar',
-      '抽气速度': '25L/min',
-      '额定功率': '95W',
-      '电压': '220-240V',
-      '频率': '50Hz',
-      '防腐等级': '高防腐'
+      '真空度(mbar)': '≤13',
+      '抽气速度(L/min)': '≤25',
+      '马达转速(rpm)': '1450',
+      '类型': '双级泵',
+      '接口规格(mm)': '10',
+      '尺寸WxDxH(mm)': '230×155×173',
+      '重量(kg)': '10',
+      '噪音(dB)': '50',
+      '电源规格': '220-240V/50Hz',
+      '额定功率(W)': '95'
     }
   },
   {
@@ -285,18 +288,22 @@ export const wiggensProducts: WiggensProduct[] = [
     name: 'ChemVak C300 防腐蚀隔膜真空泵',
     category: '真空泵',
     image: '/brands/wiggens/chemvak-c300-corrosion-resistant-vacuum-pump.jpg',
-    description: 'ChemVak C300防腐蚀隔膜真空泵，紧凑型设计，提供优异的防腐蚀性能和稳定的真空度，适用于实验室应用。',
+    description: 'C系列隔膜泵提供紧凑、高性能和易操作的真空解决方案，适用单向过滤。隔膜确保无油隔膜泵长期使用。节省空间的技术，确保操作便利。PTFE涂层膜片和阀门提供化学抗腐蚀性。选配的手动真空调节器可调节真空泵的流量和极限真空度。',
     features: ['紧凑设计', '优异防腐', '实验室专用', '稳定真空', '静音运行', '操作简便'],
     price: '询价',
     link: 'http://cn.wiggens.com/list-16-1.html',
     officialLink: 'http://cn.wiggens.com/list-16-1.html',
     specifications: {
-      '真空度': '100mbar',
-      '抽气速度': '22L/min',
-      '电压': '220-240V/50Hz',
-      '额定功率': '120W',
-      '噪音': '<45dB',
-      '重量': '8kg'
+      '真空度(mbar)': '≤100',
+      '抽气速度(L/min)': '≤22',
+      '马达转速(rpm)': '1450',
+      '类型': '单级泵',
+      '接口规格(mm)': '10',
+      '尺寸WxDxH(mm)': '233×110×210',
+      '重量(kg)': '6',
+      '噪音(dB)': '50',
+      '电源规格': '220-240V/50Hz',
+      '额定功率(W)': '60'
     }
   }
 ];

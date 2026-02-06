@@ -23,7 +23,8 @@ sudo apt install -y curl git build-essential
 ```bash
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
-
+···安装nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 # 验证
 node -v   # 应显示 v20.x.x
 npm -v
