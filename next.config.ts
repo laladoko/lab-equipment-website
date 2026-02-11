@@ -1,7 +1,9 @@
 import type { NextConfig } from 'next'
 
+const useStaticExport = process.env.USE_STATIC_EXPORT === '1'
+
 const nextConfig: NextConfig = {
-  // 基本图片配置
+  // 静态导出时图片不经过 Node 优化，直接使用原图
   images: {
     remotePatterns: [
       {
@@ -9,22 +11,17 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
-    // 确保浏览器兼容性
     dangerouslyAllowSVG: true,
-    unoptimized: false,
+    unoptimized: useStaticExport,
   },
-  // 实验性特性配置
   experimental: {
     optimizePackageImports: ['lucide-react', 'framer-motion'],
   },
-  // 生产环境优化
   productionBrowserSourceMaps: false,
-  // 压缩配置
   compress: true,
-  // 禁用 x-powered-by header
   poweredByHeader: false,
-  // 生成静态页面以减少服务器负载
-  output: 'standalone',
+  // 默认 standalone（Docker/Node 部署）；USE_STATIC_EXPORT=1 时为纯静态（Nginx 部署、最小负载）
+  output: useStaticExport ? 'export' : 'standalone',
 }
 
 export default nextConfig 

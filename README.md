@@ -24,13 +24,19 @@ npm start
 ```
 
 ### 生产部署
-```bash
-# 使用自动部署系统（推荐）
-./auto-deploy.sh monitor
 
-# 或手动部署
-./deploy.sh
+**低配服务器（2核2G，最小负载，推荐）**  
+静态导出 + Nginx，不跑 Node，内存约 50MB 内：
+
+```bash
+# 本机：打包并上传到服务器
+./scripts/deploy-to-server.sh root@103.44.245.79
 ```
+
+服务器上解压到 `/var/www/lab-equipment`，用 Nginx 托管。详见 `server-config/README-STATIC-DEPLOY.md`。
+
+**需要 Node 时（含后台管理）**  
+使用 `npm run build` + `npm start` 或 Docker，见下方部署方式。
 
 ## 🛠️ 系统要求
 
@@ -78,7 +84,15 @@ npm start
 
 ## 📦 部署方式
 
-### 方式一：传统服务器部署
+### 方式一：静态站点（2核2G 最小负载）
+```bash
+# 本机生成静态包
+./scripts/build-static.sh
+# 将 out/ 上传到服务器，用 Nginx 配置 root 指向该目录
+# 详见 server-config/README-STATIC-DEPLOY.md
+```
+
+### 方式二：传统服务器部署（Node）
 ```bash
 # 1. 安装 Node.js 18+
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash -
@@ -95,7 +109,7 @@ npm run build
 pm2 start ecosystem.config.js
 ```
 
-### 方式二：Docker 部署
+### 方式三：Docker 部署
 ```bash
 # 构建镜像
 docker build -t lab-equipment-website .
